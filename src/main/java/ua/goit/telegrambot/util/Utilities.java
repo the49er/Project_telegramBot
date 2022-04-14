@@ -24,10 +24,9 @@ public final class Utilities {
         return json;
     }
 
-    //check get currency from api
+    //check for error from API
     public static boolean checkCurrency(){
-        boolean err = FileUpdate.isCheckErr();
-        return err;
+        return FileUpdate.isCheckErr();
     }
 
 }
