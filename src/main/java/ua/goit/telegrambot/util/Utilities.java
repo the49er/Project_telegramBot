@@ -1,7 +1,7 @@
 package ua.goit.telegrambot.util;
 
 import org.jsoup.Jsoup;
-import ua.goit.telegrambot.api.currency.FileUpdate;
+import ua.goit.telegrambot.api.currency.CurrencyUpdate;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -20,14 +20,23 @@ public final class Utilities {
                     .text();
         } catch (IOException e) {
             e.printStackTrace();
-            throw new IllegalStateException("Can't connect to API");
+            throw new IllegalStateException("getAPIRequest method error, " +
+                    "\nCan't connect to NBU API");
         }
         return json;
     }
 
-    //check for error from API
-    public static boolean checkCurrency() {
-        return FileUpdate.isCheckErr();
+    //check for API error
+    public static boolean checkNbuCurrencyError() {
+        return CurrencyUpdate.isNbuCheckErr();
+    }
+
+    public static boolean checkPrivatCurrencyError() {
+        return CurrencyUpdate.isPrivatCheckErr();
+    }
+
+    public static boolean checkMonoCurrencyError() {
+        return CurrencyUpdate.isMonoCheckErr();
     }
 
     //wait

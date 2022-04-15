@@ -10,7 +10,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class NBUCurrencyService implements CurrencyService {
     public static final String URL = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
 
