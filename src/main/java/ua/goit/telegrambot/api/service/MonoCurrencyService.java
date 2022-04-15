@@ -1,86 +1,34 @@
 package ua.goit.telegrambot.api.service;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import lombok.Data;
-import ua.goit.telegrambot.api.dto.Currency;
-import ua.goit.telegrambot.utils.Utilities;
+import ua.goit.telegrambot.api.CurrencyJsonUpdate;
 
-import java.lang.reflect.Type;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class MonoCurrencyService implements CurrencyService {
-    public static final String URL = "https://api.monobank.ua/bank/currency";
+public class MonoCurrencyService extends ApiService {
 
+    public List<CurrencyItemMono> readFromFileJMonoBank() throws FileNotFoundException {
 
-    @Override
-    public List<Double> getRate(Currency currency) {
+        CurrencyItemMono[] currencyMonoBank = gson
+                .fromJson(new FileReader(CurrencyJsonUpdate.getABSOLUTE_PATH_MONO()), CurrencyItemMono[].class);
 
-        //Get JSON
-        String json = Utilities.getAPIRequest(URL);
+        List<CurrencyItemMono> currencyMonoBankList = new ArrayList<>();
+        for (CurrencyItemMono monoBank : currencyMonoBank) {
+            if (monoBank.getCurrencyCodeA() == 840 || monoBank.getCurrencyCodeA() == 978 || monoBank.getCurrencyCodeA() == 826) {
+                currencyMonoBankList.add(monoBank);
+            }
+        }
+        return currencyMonoBankList;
 
-        //replace for enum Currency
-        String replaceJson = json
-                .replace(":840", ":USD")
-                .replace(":978", ":EUR")
-                .replace(":980", ":UAH")
-                .replace(":826", ":GBP");
-
-        //Convert json => Java Object
-        Type typeToken = TypeToken
-                .getParameterized(List.class, CurrencyItemMono.class)
-                .getType();
-        List<CurrencyItemMono> currencyItemMono = new Gson().fromJson(replaceJson, typeToken);
-
-        //Find currency mono have delay ~ 5 min, we take all in one
-        //EUR
-        double monoBuyEUR = currencyItemMono.stream()
-                .filter(it -> it.getCurrencyCodeA() == Currency.EUR)
-                .filter(it -> it.getCurrencyCodeB() == Currency.UAH)
-                .map(CurrencyItemMono::getRateBuy)
-                .collect(Collectors.toList()).get(0);
-
-        double monoSaleEUR = currencyItemMono.stream()
-                .filter(it -> it.getCurrencyCodeA() == Currency.EUR)
-                .filter(it -> it.getCurrencyCodeB() == Currency.UAH)
-                .map(CurrencyItemMono::getRateSell)
-                .collect(Collectors.toList()).get(0);
-
-        //USD
-        double monoBuyUSD = currencyItemMono.stream()
-                .filter(it -> it.getCurrencyCodeA() == Currency.USD)
-                .filter(it -> it.getCurrencyCodeB() == Currency.UAH)
-                .map(CurrencyItemMono::getRateBuy)
-                .collect(Collectors.toList()).get(0);
-
-        double monoSaleUSD = currencyItemMono.stream()
-                .filter(it -> it.getCurrencyCodeA() == Currency.USD)
-                .filter(it -> it.getCurrencyCodeB() == Currency.UAH)
-                .map(CurrencyItemMono::getRateSell)
-                .collect(Collectors.toList()).get(0);
-        //GBP
-        double monoCrossCurseGBP = currencyItemMono.stream()
-                .filter(it -> it.getCurrencyCodeA() == Currency.GBP)
-                .filter(it -> it.getCurrencyCodeB() == Currency.UAH)
-                .map(CurrencyItemMono::getRateCross)
-                .collect(Collectors.toList()).get(0);
-
-        List<Double> sellBuyRate = new ArrayList<>();
-        sellBuyRate.add(monoBuyUSD);
-        sellBuyRate.add(monoSaleUSD);
-        sellBuyRate.add(monoBuyEUR);
-        sellBuyRate.add(monoSaleEUR);
-        sellBuyRate.add(monoCrossCurseGBP);
-
-        return sellBuyRate;
     }
 
     @Data
     public static class CurrencyItemMono {
-        private Currency currencyCodeA;
-        private Currency currencyCodeB;
+        private int currencyCodeA;
+        private int currencyCodeB;
         private int date;
         private float rateBuy;
         private float rateSell;

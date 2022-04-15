@@ -1,49 +1,30 @@
 package ua.goit.telegrambot.api.service;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import lombok.Data;
+import ua.goit.telegrambot.api.CurrencyJsonUpdate;
 import ua.goit.telegrambot.api.dto.Currency;
-import ua.goit.telegrambot.utils.Utilities;
 
-import java.lang.reflect.Type;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class PrivateBankCurrencyService implements CurrencyService {
-    public static final String URL = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
+public class PrivateBankCurrencyService extends ApiService {
 
-    @Override
-    public List<Double> getRate(Currency currency) {
+    public List<CurrencyItemPrivat> readFromFileJPrivat() throws FileNotFoundException {
 
-        //Get JSON
-        String json = Utilities.getAPIRequest(URL);
+        CurrencyItemPrivat[] currencyPrivatBanks = gson
+                .fromJson(new FileReader(CurrencyJsonUpdate.getABSOLUTE_PATH_PRIVAT()), CurrencyItemPrivat[].class);
 
-        //Convert json => Java Object
-        Type typeToken = TypeToken
-                .getParameterized(List.class, CurrencyItemPrivat.class)
-                .getType();
-        List<CurrencyItemPrivat> currencyItemPrivats = new Gson().fromJson(json, typeToken);
+        List<CurrencyItemPrivat> currencyPrivatBankList = new ArrayList<>();
 
-        //Find currency
-        double privatBuy = currencyItemPrivats.stream()
-                .filter(it -> it.getCcy() == currency)
-                .filter(it -> it.getBase_ccy() == Currency.UAH)
-                .map(CurrencyItemPrivat::getBuy)
-                .collect(Collectors.toList()).get(0);
+        for (CurrencyItemPrivat currencyPrivatBank : currencyPrivatBanks) {
+            if (currencyPrivatBank.getCcy().equals("USD") || currencyPrivatBank.getCcy().equals("EUR")) {
+                currencyPrivatBankList.add(currencyPrivatBank);
+            }
+        }
 
-        double privatSele = currencyItemPrivats.stream()
-                .filter(it -> it.getCcy() == currency)
-                .filter(it -> it.getBase_ccy() == Currency.UAH)
-                .map(CurrencyItemPrivat::getSale)
-                .collect(Collectors.toList()).get(0);
-
-        List<Double> sellBuyRate = new ArrayList<>();
-        sellBuyRate.add(privatBuy);
-        sellBuyRate.add(privatSele);
-
-        return sellBuyRate;
+        return currencyPrivatBankList;
     }
 
     @Data

@@ -1,7 +1,7 @@
 package ua.goit.telegrambot.utils;
 
 import org.jsoup.Jsoup;
-import ua.goit.telegrambot.api.CurrencyUpdate;
+import ua.goit.telegrambot.api.CurrencyJsonUpdate;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -27,15 +27,15 @@ public final class Utilities {
 
     //check for API error
     public static boolean checkNbuCurrencyError() {
-        return CurrencyUpdate.isNbuCheckErr();
+        return CurrencyJsonUpdate.isNbuCheckErr();
     }
 
     public static boolean checkPrivatCurrencyError() {
-        return CurrencyUpdate.isPrivatCheckErr();
+        return CurrencyJsonUpdate.isPrivatCheckErr();
     }
 
     public static boolean checkMonoCurrencyError() {
-        return CurrencyUpdate.isMonoCheckErr();
+        return CurrencyJsonUpdate.isMonoCheckErr();
     }
 
     //wait

@@ -1,22 +1,23 @@
 package ua.goit.telegrambot.api;
 
 import lombok.Getter;
-import ua.goit.telegrambot.api.service.CurrencyService;
-import ua.goit.telegrambot.api.service.MonoCurrencyService;
-import ua.goit.telegrambot.api.service.NBUCurrencyService;
-import ua.goit.telegrambot.api.service.PrivateBankCurrencyService;
-import ua.goit.telegrambot.api.dto.Currency;
 import ua.goit.telegrambot.utils.Utilities;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 
-public class CurrencyUpdate implements Runnable {
+public class CurrencyJsonUpdate implements Runnable {
+    @Getter
     private static final String ABSOLUTE_PATH_NBU = "src\\main\\resources\\Currency_NBU_rates.json";
+    @Getter
     private static final String ABSOLUTE_PATH_PRIVAT = "src\\main\\resources\\Currency_Privat_rates.json";
+    @Getter
     private static final String ABSOLUTE_PATH_MONO = "src\\main\\resources\\Currency_Mono_rates.json";
+    public static final String NBU_URL = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
+    public static final String PRIVAT_URL = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
+    public static final String MONO_URL = "https://api.monobank.ua/bank/currency";
+
 
     @Getter
     private static boolean nbuCheckErr = true;
@@ -35,11 +36,6 @@ public class CurrencyUpdate implements Runnable {
             while (true) {
 
                 try {
-                    CurrencyService currencyServiceNBU = new NBUCurrencyService();
-                    List<Double> nbuRateUSD = currencyServiceNBU.getRate(Currency.USD);
-                    List<Double> nbuRateEUR = currencyServiceNBU.getRate(Currency.EUR);
-                    List<Double> nbuRateGBP = currencyServiceNBU.getRate(Currency.GBP);
-
                     File file = new File(ABSOLUTE_PATH_NBU);
 
                     if (!file.exists()) {
@@ -53,14 +49,7 @@ public class CurrencyUpdate implements Runnable {
                     }
 
                     try (FileWriter writer = new FileWriter(file)) {
-                        writer.write("[\n" + //Create a file manually to avoid boxing and unboxing
-                                "{\n" +
-                                "  \"bank\": \"NBU\",\n" +
-                                "  \"rateUSD\": \"" + nbuRateUSD.get(0) + "\",\n" +
-                                "  \"rateEUR\": \"" + nbuRateEUR.get(0) + "\",\n" +
-                                "  \"rateGBP\": \"" + nbuRateGBP.get(0) + "\"\n" +
-                                "}\n" +
-                                "]");
+                        writer.write(Utilities.getAPIRequest(NBU_URL));
                         nbuCheckErr = false;
                     } catch (IOException e) {
                         System.err.println(e.getMessage());
@@ -82,10 +71,6 @@ public class CurrencyUpdate implements Runnable {
             while (true) {
 
                 try {
-                    CurrencyService currencyServicePrivat = new PrivateBankCurrencyService();
-                    List<Double> privateRateUSD = currencyServicePrivat.getRate(Currency.USD);
-                    List<Double> privateRateEUR = currencyServicePrivat.getRate(Currency.EUR);
-
                     File file = new File(ABSOLUTE_PATH_PRIVAT);
 
                     if (!file.exists()) {
@@ -99,15 +84,7 @@ public class CurrencyUpdate implements Runnable {
                     }
 
                     try (FileWriter writer = new FileWriter(file)) {
-                        writer.write("[\n" + //Create a file manually to avoid boxing and unboxing
-                                "{\n" +
-                                "  \"bank\": \"Privat\",\n" +
-                                "  \"buyUSD\": \"" + privateRateUSD.get(0) + "\",\n" +
-                                "  \"saleUSD\": \"" + privateRateUSD.get(1) + "\",\n" +
-                                "  \"buyEUR\": \"" + privateRateEUR.get(0) + "\",\n" +
-                                "  \"saleEUR\": \"" + privateRateEUR.get(1) + "\"\n" +
-                                "}\n" +
-                                "]");
+                        writer.write(Utilities.getAPIRequest(PRIVAT_URL));
                         privatCheckErr = false;
                     } catch (IOException e) {
                         System.err.println(e.getMessage());
@@ -129,9 +106,6 @@ public class CurrencyUpdate implements Runnable {
             while (true) {
 
                 try {
-                    CurrencyService currencyServiceMono = new MonoCurrencyService();
-                    List<Double> monoRateUSD = currencyServiceMono.getRate(Currency.USD);
-
                     File file = new File(ABSOLUTE_PATH_MONO);
 
                     if (!file.exists()) {
@@ -145,16 +119,7 @@ public class CurrencyUpdate implements Runnable {
                     }
 
                     try (FileWriter writer = new FileWriter(file)) {
-                        writer.write("[\n" + //Create a file manually to avoid boxing and unboxing
-                                "{\n" +
-                                "  \"bank\": \"Mono\",\n" +
-                                "  \"buyUSD\": \"" + monoRateUSD.get(0) + "\",\n" +
-                                "  \"saleUSD\": \"" + monoRateUSD.get(1) + "\",\n" +
-                                "  \"buyEUR\": \"" + monoRateUSD.get(2) + "\",\n" +
-                                "  \"saleEUR\": \"" + monoRateUSD.get(3) + "\",\n" +
-                                "  \"CrossCurseGBP\": \"" + monoRateUSD.get(4) + "\"\n" +
-                                "}\n" +
-                                "]");
+                        writer.write(Utilities.getAPIRequest(MONO_URL));
                         monoCheckErr = false;
                     } catch (IOException e) {
                         System.err.println(e.getMessage());

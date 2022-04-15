@@ -1,51 +1,37 @@
 package ua.goit.telegrambot.api.service;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import lombok.Data;
+import ua.goit.telegrambot.api.CurrencyJsonUpdate;
 import ua.goit.telegrambot.api.dto.Currency;
-import ua.goit.telegrambot.utils.Utilities;
 
-import java.lang.reflect.Type;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class NBUCurrencyService implements CurrencyService {
-    public static final String URL = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
+public class NBUCurrencyService extends ApiService {
 
-    @Override
-    public List<Double> getRate(Currency currency) {
+    public List<CurrencyItemNBU> getCurrency() throws IOException {
+        CurrencyItemNBU[] currencyNbu = gson
+                .fromJson(new FileReader(CurrencyJsonUpdate.getABSOLUTE_PATH_NBU()), CurrencyItemNBU[].class);
 
-        //Get JSON
-        String json = Utilities.getAPIRequest(URL);
+        List<CurrencyItemNBU> currencyNbuList = new ArrayList<>();
 
-        //Convert json => Java Object
-        Type typeToken = TypeToken
-                .getParameterized(List.class, CurrencyItemNBU.class)
-                .getType();
-        List<CurrencyItemNBU> currencyItemsNBU = new Gson().fromJson(json, typeToken);
+        for (CurrencyItemNBU nbu : currencyNbu) {
+            if (nbu.getR030() == 840 || nbu.getR030() == 978) {
+                currencyNbuList.add(nbu);
+            }
+        }
 
-        //Find currency
-        double currencyRate = currencyItemsNBU.stream()
-                .filter(it -> it.getCc() == currency)
-                .map(CurrencyItemNBU::getRate)
-                .collect(Collectors.toList()).get(0);
-
-
-        List<Double> rate = new ArrayList<>();
-        rate.add(currencyRate);
-
-        return rate;
+        return currencyNbuList;
     }
 
     @Data
     public static class CurrencyItemNBU {
         private int r030;
-        private String txt;
         private float rate;
         private Currency cc;
-        private String exchangedate;
+
     }
 
 }
