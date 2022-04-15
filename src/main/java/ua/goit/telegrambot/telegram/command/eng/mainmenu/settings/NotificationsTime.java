@@ -4,9 +4,8 @@ import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.User;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -22,59 +21,108 @@ public class NotificationsTime extends BotCommand {
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
 
-        String text = "Set a reminder time";
+        String text = "Set a reminder time \uD83D\uDD14";
         SendMessage message = new SendMessage();
         message.setText(text);
         message.setChatId(Long.toString(chat.getId()));
 
-        KeyboardButton nineAm = KeyboardButton.builder().text("9:00").build();
-        KeyboardButton tenAm = KeyboardButton.builder().text("10:00").build();
-        KeyboardButton elevenAm = KeyboardButton.builder().text("11:00").build();
+        InlineKeyboardButton nineAm = InlineKeyboardButton
+                .builder()
+                .text("9:00")
+                .callbackData("9:00")
+                .build();
 
-        KeyboardRow firstRow = new KeyboardRow();
-        firstRow.add(nineAm);
-        firstRow.add(tenAm);
-        firstRow.add(elevenAm);
+        InlineKeyboardButton tenAm = InlineKeyboardButton
+                .builder()
+                .text("10:00")
+                .callbackData("10:00")
+                .build();
 
-        KeyboardButton twelweAm = KeyboardButton.builder().text("12:00").build();
-        KeyboardButton onePm = KeyboardButton.builder().text("13:00").build();
-        KeyboardButton twoPm = KeyboardButton.builder().text("14:00").build();
+        InlineKeyboardButton elevenAm = InlineKeyboardButton
+                .builder()
+                .text("11:00")
+                .callbackData("11:00")
+                .build();
 
-        KeyboardRow secondRow = new KeyboardRow();
-        firstRow.add(twelweAm);
-        firstRow.add(onePm);
-        firstRow.add(twoPm);
+        List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
+        keyboardButtonsRow1.add(nineAm);
+        keyboardButtonsRow1.add(tenAm);
+        keyboardButtonsRow1.add(elevenAm);
 
-        KeyboardButton threePm = KeyboardButton.builder().text("15:00").build();
-        KeyboardButton fourPm = KeyboardButton.builder().text("16:00").build();
-        KeyboardButton fivePm = KeyboardButton.builder().text("17:00").build();
+        InlineKeyboardButton twelweAm = InlineKeyboardButton
+                .builder()
+                .text("12:00")
+                .callbackData("12:00")
+                .build();
 
-        KeyboardRow thirdRow = new KeyboardRow();
-        firstRow.add(threePm);
-        firstRow.add(fourPm);
-        firstRow.add(fivePm);
+        InlineKeyboardButton onePm = InlineKeyboardButton
+                .builder()
+                .text("13:00")
+                .callbackData("13:00")
+                .build();
 
-        KeyboardButton sixPm = KeyboardButton.builder().text("18:00").build();
-        KeyboardButton disable_notifications = KeyboardButton.builder().text("Disable notifications").build();
+        InlineKeyboardButton twoPm = InlineKeyboardButton
+                .builder()
+                .text("14:00")
+                .callbackData("14:00")
+                .build();
 
-        KeyboardRow fourthRow = new KeyboardRow();
-        firstRow.add(sixPm);
-        firstRow.add(disable_notifications);
+        List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList<>();
+        keyboardButtonsRow2.add(twelweAm);
+        keyboardButtonsRow2.add(onePm);
+        keyboardButtonsRow2.add(twoPm);
 
-        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+        InlineKeyboardButton threePm = InlineKeyboardButton
+                .builder()
+                .text("15:00")
+                .callbackData("15:00")
+                .build();
 
-        // Create the keyboard (list of keyboard rows)
+        InlineKeyboardButton fourPm = InlineKeyboardButton
+                .builder()
+                .text("16:00")
+                .callbackData("16:00")
+                .build();
 
-        List<KeyboardRow> timeKeyboard = new ArrayList<>();
-        timeKeyboard.add(firstRow);
-        timeKeyboard.add(secondRow);
-//        timeKeyboard.add(thirdRow);
-//        timeKeyboard.add(fourthRow);
+        InlineKeyboardButton fivePm = InlineKeyboardButton
+                .builder()
+                .text("17:00")
+                .callbackData("17:00")
+                .build();
+
+        List<InlineKeyboardButton> keyboardButtonsRow3 = new ArrayList<>();
+        keyboardButtonsRow3.add(threePm);
+        keyboardButtonsRow3.add(fourPm);
+        keyboardButtonsRow3.add(fivePm);
+
+        InlineKeyboardButton sixPm = InlineKeyboardButton
+                .builder()
+                .text("18:00")
+                .callbackData("18:00")
+                .build();
+
+        InlineKeyboardButton disable_notifications = InlineKeyboardButton
+                .builder()
+                .text("Disable notifications \uD83D\uDD15")
+                .callbackData("Disable notifications")
+                .build();
+
+        List<InlineKeyboardButton> keyboardButtonsRow4 = new ArrayList<>();
+        keyboardButtonsRow4.add(sixPm);
+        keyboardButtonsRow4.add(disable_notifications);
+
+
+        List<List<InlineKeyboardButton>> timeKeyboard = new ArrayList<>();
+        timeKeyboard.add(keyboardButtonsRow1);
+        timeKeyboard.add(keyboardButtonsRow2);
+        timeKeyboard.add(keyboardButtonsRow3);
+        timeKeyboard.add(keyboardButtonsRow4);
+
+        InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
 
         keyboardMarkup.setKeyboard(timeKeyboard);
 
         message.setReplyMarkup(keyboardMarkup);
-
 
         try {
             absSender.execute(message);

@@ -1,6 +1,7 @@
 package ua.goit.telegrambot.telegram;
 
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ua.goit.telegrambot.telegram.command.eng.mainmenu.GetInfoCommand;
@@ -47,14 +48,13 @@ public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
     @Override
     public void processNonCommandUpdate(Update update) {
 
-        if (update.hasCallbackQuery()){
+        if (update.hasCallbackQuery()) {
             String callbackQuery = update.getCallbackQuery().getData();
-//                if(callbackQuery == "starteng"){
-//                SettingsCommand settingsCommand = new SettingsCommand();
-//                    SendMessage responseMessage = new SendMessage();
+//                //if(callbackQuery == "English"){
+//
+//                SendMessage responseMessage = new SendMessage();
 //                    responseMessage.getClass();
-//                }
-
+            //}
             System.out.println("callbackQuery = " + callbackQuery);
         }
 
@@ -82,13 +82,10 @@ public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
 //                }
             }
         }
-        //System.out.println("Sorry, I don't know this command!");
     }
 
     @Override
     public void onUpdatesReceived(List<Update> updates) {
-
         super.onUpdatesReceived(updates);
     }
-
 }

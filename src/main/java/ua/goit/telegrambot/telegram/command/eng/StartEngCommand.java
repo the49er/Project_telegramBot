@@ -20,7 +20,7 @@ public class StartEngCommand extends BotCommand{
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
-        String helloText = "Hi! This bot will help you get the current exchange rate.";
+        String helloText = "This bot will help you get the current exchange rate.";
 
         SendMessage message = new SendMessage();
         message.setText(helloText);
@@ -61,4 +61,3 @@ public class StartEngCommand extends BotCommand{
         }
     }
 }
-//language_code - кодовое обозначение выбранного языка интерфейса приложения (en, ru ...)
