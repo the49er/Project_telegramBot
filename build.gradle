@@ -35,6 +35,12 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-nop
     implementation group: 'org.slf4j', name: 'slf4j-nop', version: '1.7.21'
+
+
+}
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
 
 test {
