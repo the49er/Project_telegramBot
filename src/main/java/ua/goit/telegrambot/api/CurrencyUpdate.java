@@ -1,8 +1,12 @@
-package ua.goit.telegrambot.api.currency;
+package ua.goit.telegrambot.api;
 
 import lombok.Getter;
-import ua.goit.telegrambot.api.currency.dto.Currency;
-import ua.goit.telegrambot.util.Utilities;
+import ua.goit.telegrambot.api.service.CurrencyService;
+import ua.goit.telegrambot.api.service.MonoCurrencyService;
+import ua.goit.telegrambot.api.service.NBUCurrencyService;
+import ua.goit.telegrambot.api.service.PrivateBankCurrencyService;
+import ua.goit.telegrambot.api.dto.Currency;
+import ua.goit.telegrambot.utils.Utilities;
 
 import java.io.File;
 import java.io.FileWriter;

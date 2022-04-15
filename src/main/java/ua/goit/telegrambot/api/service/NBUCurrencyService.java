@@ -1,14 +1,15 @@
-package ua.goit.telegrambot.api.currency;
+package ua.goit.telegrambot.api.service;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.Data;
-import ua.goit.telegrambot.api.currency.dto.Currency;
-import ua.goit.telegrambot.util.Utilities;
+import ua.goit.telegrambot.api.dto.Currency;
+import ua.goit.telegrambot.utils.Utilities;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class NBUCurrencyService implements CurrencyService {
     public static final String URL = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
@@ -26,14 +27,14 @@ public class NBUCurrencyService implements CurrencyService {
         List<CurrencyItemNBU> currencyItemsNBU = new Gson().fromJson(json, typeToken);
 
         //Find currency
-        Float currencyRate = currencyItemsNBU.stream()
+        double currencyRate = currencyItemsNBU.stream()
                 .filter(it -> it.getCc() == currency)
                 .map(CurrencyItemNBU::getRate)
-                .findFirst()
-                .orElseThrow();
+                .collect(Collectors.toList()).get(0);
+
 
         List<Double> rate = new ArrayList<>();
-        rate.add((double) currencyRate);
+        rate.add(currencyRate);
 
         return rate;
     }

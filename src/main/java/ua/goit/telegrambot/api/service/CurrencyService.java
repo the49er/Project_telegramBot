@@ -1,6 +1,6 @@
-package ua.goit.telegrambot.api.currency;
+package ua.goit.telegrambot.api.service;
 
-import ua.goit.telegrambot.api.currency.dto.Currency;
+import ua.goit.telegrambot.api.dto.Currency;
 
 import java.util.List;
 

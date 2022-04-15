@@ -1,7 +1,7 @@
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
-import ua.goit.telegrambot.api.currency.CurrencyUpdate;
+import ua.goit.telegrambot.api.CurrencyUpdate;
 import ua.goit.telegrambot.telegram.TelegramCurrencyBot;
 
 public class TelegramBotApp {

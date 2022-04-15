@@ -1,14 +1,15 @@
-package ua.goit.telegrambot.api.currency;
+package ua.goit.telegrambot.api.service;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.Data;
-import ua.goit.telegrambot.api.currency.dto.Currency;
-import ua.goit.telegrambot.util.Utilities;
+import ua.goit.telegrambot.api.dto.Currency;
+import ua.goit.telegrambot.utils.Utilities;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PrivateBankCurrencyService implements CurrencyService {
     public static final String URL = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
@@ -26,23 +27,21 @@ public class PrivateBankCurrencyService implements CurrencyService {
         List<CurrencyItemPrivat> currencyItemPrivats = new Gson().fromJson(json, typeToken);
 
         //Find currency
-        Float privatBuy = currencyItemPrivats.stream()
+        double privatBuy = currencyItemPrivats.stream()
                 .filter(it -> it.getCcy() == currency)
                 .filter(it -> it.getBase_ccy() == Currency.UAH)
                 .map(CurrencyItemPrivat::getBuy)
-                .findFirst()
-                .orElseThrow();
+                .collect(Collectors.toList()).get(0);
 
-        Float privatSele = currencyItemPrivats.stream()
+        double privatSele = currencyItemPrivats.stream()
                 .filter(it -> it.getCcy() == currency)
                 .filter(it -> it.getBase_ccy() == Currency.UAH)
                 .map(CurrencyItemPrivat::getSale)
-                .findFirst()
-                .orElseThrow();
+                .collect(Collectors.toList()).get(0);
 
         List<Double> sellBuyRate = new ArrayList<>();
-        sellBuyRate.add((double) privatBuy);
-        sellBuyRate.add((double) privatSele);
+        sellBuyRate.add(privatBuy);
+        sellBuyRate.add(privatSele);
 
         return sellBuyRate;
     }

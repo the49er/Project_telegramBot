@@ -1,7 +1,7 @@
-package ua.goit.telegrambot.util;
+package ua.goit.telegrambot.utils;
 
 import org.jsoup.Jsoup;
-import ua.goit.telegrambot.api.currency.CurrencyUpdate;
+import ua.goit.telegrambot.api.CurrencyUpdate;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -20,8 +20,7 @@ public final class Utilities {
                     .text();
         } catch (IOException e) {
             e.printStackTrace();
-            throw new IllegalStateException("getAPIRequest method error, " +
-                    "\nCan't connect to API");
+            throw new IllegalStateException("getAPIRequest method error");
         }
         return json;
     }

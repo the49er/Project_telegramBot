@@ -1,14 +1,15 @@
-package ua.goit.telegrambot.api.currency;
+package ua.goit.telegrambot.api.service;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.Data;
-import ua.goit.telegrambot.api.currency.dto.Currency;
-import ua.goit.telegrambot.util.Utilities;
+import ua.goit.telegrambot.api.dto.Currency;
+import ua.goit.telegrambot.utils.Utilities;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MonoCurrencyService implements CurrencyService {
     public static final String URL = "https://api.monobank.ua/bank/currency";
@@ -35,48 +36,43 @@ public class MonoCurrencyService implements CurrencyService {
 
         //Find currency mono have delay ~ 5 min, we take all in one
         //EUR
-        Float monoBuyEUR = currencyItemMono.stream()
+        double monoBuyEUR = currencyItemMono.stream()
                 .filter(it -> it.getCurrencyCodeA() == Currency.EUR)
                 .filter(it -> it.getCurrencyCodeB() == Currency.UAH)
                 .map(CurrencyItemMono::getRateBuy)
-                .findFirst()
-                .orElseThrow();
+                .collect(Collectors.toList()).get(0);
 
-        Float monoSaleEUR = currencyItemMono.stream()
+        double monoSaleEUR = currencyItemMono.stream()
                 .filter(it -> it.getCurrencyCodeA() == Currency.EUR)
                 .filter(it -> it.getCurrencyCodeB() == Currency.UAH)
                 .map(CurrencyItemMono::getRateSell)
-                .findFirst()
-                .orElseThrow();
+                .collect(Collectors.toList()).get(0);
 
         //USD
-        Float monoBuyUSD = currencyItemMono.stream()
+        double monoBuyUSD = currencyItemMono.stream()
                 .filter(it -> it.getCurrencyCodeA() == Currency.USD)
                 .filter(it -> it.getCurrencyCodeB() == Currency.UAH)
                 .map(CurrencyItemMono::getRateBuy)
-                .findFirst()
-                .orElseThrow();
+                .collect(Collectors.toList()).get(0);
 
-        Float monoSaleUSD = currencyItemMono.stream()
+        double monoSaleUSD = currencyItemMono.stream()
                 .filter(it -> it.getCurrencyCodeA() == Currency.USD)
                 .filter(it -> it.getCurrencyCodeB() == Currency.UAH)
                 .map(CurrencyItemMono::getRateSell)
-                .findFirst()
-                .orElseThrow();
+                .collect(Collectors.toList()).get(0);
         //GBP
-        Float monoCrossCurseGBP = currencyItemMono.stream()
+        double monoCrossCurseGBP = currencyItemMono.stream()
                 .filter(it -> it.getCurrencyCodeA() == Currency.GBP)
                 .filter(it -> it.getCurrencyCodeB() == Currency.UAH)
                 .map(CurrencyItemMono::getRateCross)
-                .findFirst()
-                .orElseThrow();
+                .collect(Collectors.toList()).get(0);
 
         List<Double> sellBuyRate = new ArrayList<>();
-        sellBuyRate.add((double) monoBuyUSD);
-        sellBuyRate.add((double) monoSaleUSD);
-        sellBuyRate.add((double) monoBuyEUR);
-        sellBuyRate.add((double) monoSaleEUR);
-        sellBuyRate.add((double) monoCrossCurseGBP);
+        sellBuyRate.add(monoBuyUSD);
+        sellBuyRate.add(monoSaleUSD);
+        sellBuyRate.add(monoBuyEUR);
+        sellBuyRate.add(monoSaleEUR);
+        sellBuyRate.add(monoCrossCurseGBP);
 
         return sellBuyRate;
     }
