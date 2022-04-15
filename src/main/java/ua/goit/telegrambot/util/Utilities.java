@@ -21,7 +21,7 @@ public final class Utilities {
         } catch (IOException e) {
             e.printStackTrace();
             throw new IllegalStateException("getAPIRequest method error, " +
-                    "\nCan't connect to NBU API");
+                    "\nCan't connect to API");
         }
         return json;
     }
