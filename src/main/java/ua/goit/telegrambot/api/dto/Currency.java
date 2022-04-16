@@ -9,11 +9,12 @@ public enum Currency {
 
     private int currency;
 
-    Currency(int currency) {
+    Currency (int currency) {
         this.currency = currency;
     }
 
     public int getCurrency(){
         return currency;
     }
+
 }

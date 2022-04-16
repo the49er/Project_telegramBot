@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 public class MonoBankApi extends BankApi {
     private static final String API_LINK = "https://api.monobank.ua/bank/currency";
-    private String jsonFilePath = "src/main/resource/monobank_rates.json";
+    private String jsonFilePath = "src/monoBank_rates.json";
 
     @Override
     public void getRatesAndSaveToJsonFile() {
@@ -33,17 +33,15 @@ public class MonoBankApi extends BankApi {
             e.printStackTrace();
         }
 
-        String outputString = BankApi.GSON.toJson(response.body());
         try (FileWriter output = new FileWriter(jsonFilePath)) {
-            output.write(outputString);
+            output.write(response.body());
         } catch (IOException e) {
             e.getStackTrace();
         }
-
     }
 
     @Override
-    public double getCurrencyBuyRatesByUserRequest(int currencyA, int currencyB, int roundTheNumber) {
+    public double getCurrencyBuyRatesByUserRequest(int currencyA) {
         double result =  Arrays.stream(getRatesList())
                 .filter(it -> it.getCurrencyCodeA() == currencyA)
                 .filter(it -> it.getCurrencyCodeB() == Currency.UAH.getCurrency())
@@ -51,13 +49,13 @@ public class MonoBankApi extends BankApi {
                 .findFirst()
                 .orElseThrow();
 
-        double buy = DoubleRounder.round(result, roundTheNumber);
+        double buy = DoubleRounder.round(result, 2);
 
         return buy;
     }
 
     @Override
-    public double getCurrencySellRatesByUserRequest(int currencyA, int currencyB, int roundTheNumber) {
+    public double getCurrencySellRatesByUserRequest(int currencyA) {
         double result =  Arrays.stream(getRatesList())
                 .filter(it -> it.getCurrencyCodeA() == currencyA)
                 .filter(it -> it.getCurrencyCodeB() == Currency.UAH.getCurrency())
@@ -65,14 +63,14 @@ public class MonoBankApi extends BankApi {
                 .findFirst()
                 .orElseThrow();
 
-        double sell = DoubleRounder.round(result, roundTheNumber);
+        double sell = DoubleRounder.round(result, 4);
 
         return sell;
     }
-    private MonoBankJsonResponse[] getRatesList(){
+    public MonoBankJsonResponse[] getRatesList(){
         FileReader fileReader = null;
         try {
-            fileReader = new FileReader("src/main/resource/monobank_rates.json");
+            fileReader = new FileReader("src/monoBank_rates.json");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -92,7 +90,7 @@ public class MonoBankApi extends BankApi {
                 e.printStackTrace();
             }
         }
-        String resultSb = stringBuffer.toString();
+          String resultSb = stringBuffer.toString();
 
         MonoBankJsonResponse[] currenciesRates = BankApi.GSON.fromJson(resultSb, MonoBankJsonResponse[].class);
         return currenciesRates;

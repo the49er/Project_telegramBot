@@ -9,8 +9,8 @@ public abstract class BankApi {
     public static final Gson GSON = new Gson();
 
     public abstract void getRatesAndSaveToJsonFile();
-    public abstract double getCurrencySellRatesByUserRequest (int currencyA, int currencyB, int roundTheNumber);
-    public abstract double getCurrencyBuyRatesByUserRequest (int currencyA, int currencyB, int roundTheNumber);
+    public abstract double getCurrencySellRatesByUserRequest (int currencyA);
+    public abstract double getCurrencyBuyRatesByUserRequest (int currencyA);
 
 
 }

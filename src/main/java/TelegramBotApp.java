@@ -1,6 +1,7 @@
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+import ua.goit.telegrambot.api.dto.Currency;
 import ua.goit.telegrambot.telegram.TelegramCurrencyBot;
 
 public class TelegramBotApp {
@@ -11,6 +12,6 @@ public class TelegramBotApp {
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
-
+        System.out.println("Currency.USD.getCurrency() = " + Currency.USD.getCurrency());
     }
 }
