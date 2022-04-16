@@ -20,7 +20,7 @@ public class StartUkrCommand extends BotCommand{
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
-        String helloText = "Цей бот допоможе вам отримати поточний курс обміну.";
+        String helloText = "Цей бот допоможе вам отримати поточний курс валют.";
 
         SendMessage message = new SendMessage();
         message.setText(helloText);
