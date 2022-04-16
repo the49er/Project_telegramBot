@@ -1,8 +1,19 @@
-package ua.goit.telegrambot.telegram.api.dto;
+package ua.goit.telegrambot.api.dto;
+
 
 public enum Currency {
-    USD,
-    EUR,
-    UAH,
-    GBP
+    USD(840),
+    EUR(978),
+    UAH(980);
+
+
+    private int currency;
+
+    Currency(int currency) {
+        this.currency = currency;
+    }
+
+    public int getCurrency(){
+        return currency;
+    }
 }

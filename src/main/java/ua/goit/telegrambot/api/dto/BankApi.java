@@ -1,4 +1,4 @@
-package ua.goit.telegrambot.telegram.api.dto;
+package ua.goit.telegrambot.api.dto;
 
 import com.google.gson.Gson;
 
