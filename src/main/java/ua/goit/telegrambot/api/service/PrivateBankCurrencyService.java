@@ -1,30 +1,15 @@
 package ua.goit.telegrambot.api.service;
 
 import lombok.Data;
-import ua.goit.telegrambot.api.CurrencyJsonUpdate;
 import ua.goit.telegrambot.api.dto.Currency;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
-public class PrivateBankCurrencyService extends ApiService {
+public class PrivateBankCurrencyService implements CurrencyService{
 
-    public List<CurrencyItemPrivat> readFromFileJPrivat() throws FileNotFoundException {
-
-        CurrencyItemPrivat[] currencyPrivatBanks = gson
-                .fromJson(new FileReader(CurrencyJsonUpdate.getABSOLUTE_PATH_PRIVAT()), CurrencyItemPrivat[].class);
-
-        List<CurrencyItemPrivat> currencyPrivatBankList = new ArrayList<>();
-
-        for (CurrencyItemPrivat currencyPrivatBank : currencyPrivatBanks) {
-            if (currencyPrivatBank.getCcy().equals("USD") || currencyPrivatBank.getCcy().equals("EUR")) {
-                currencyPrivatBankList.add(currencyPrivatBank);
-            }
-        }
-
-        return currencyPrivatBankList;
+    @Override
+    public HashMap<String, Double> getRate() {
+        return null;
     }
 
     @Data

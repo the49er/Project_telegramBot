@@ -17,11 +17,6 @@ public class TelegramBotApp {
         CurrencyJsonUpdate fileCurrencyJsonUpdate = new CurrencyJsonUpdate();
         fileCurrencyJsonUpdate.run();
 
-        PrivateBankCurrencyService privateBankCurrencyService = new PrivateBankCurrencyService();
-        PrivateBankCurrencyService.CurrencyItemPrivat privatUSD = privateBankCurrencyService.readFromFileJPrivat().get(0);
-        PrivateBankCurrencyService.CurrencyItemPrivat privatEUR = privateBankCurrencyService.readFromFileJPrivat().get(1);
-        System.out.println("privatUSD = " + privatUSD);
-        System.out.println("privatEUR = " + privatEUR);
 
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);

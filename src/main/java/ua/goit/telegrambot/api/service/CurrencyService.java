@@ -1,7 +1,7 @@
 package ua.goit.telegrambot.api.service;
 
-import ua.goit.telegrambot.api.dto.Currency;
+import java.util.HashMap;
 
 public interface CurrencyService {
-    String getRate();
+    HashMap<String, Double> getRate();
 }
