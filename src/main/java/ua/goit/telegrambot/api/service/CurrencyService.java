@@ -1,7 +1,11 @@
 package ua.goit.telegrambot.api.service;
 
-import java.util.HashMap;
+import ua.goit.telegrambot.api.dto.Currency;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Map;
 
 public interface CurrencyService {
-    HashMap<String, Double> getRate();
+    Map<String, BigDecimal> getRate(Currency currency) throws IOException;
 }

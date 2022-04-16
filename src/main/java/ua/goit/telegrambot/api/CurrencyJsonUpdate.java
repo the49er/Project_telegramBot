@@ -18,7 +18,6 @@ public class CurrencyJsonUpdate implements Runnable {
     public static final String PRIVAT_URL = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
     public static final String MONO_URL = "https://api.monobank.ua/bank/currency";
 
-
     @Getter
     private static boolean nbuCheckErr = true;
     @Getter
@@ -37,17 +36,7 @@ public class CurrencyJsonUpdate implements Runnable {
 
                 try {
                     File file = new File(ABSOLUTE_PATH_NBU);
-
-                    if (!file.exists()) {
-                        file.getParentFile().mkdirs();
-
-                        try {
-                            file.createNewFile();
-                        } catch (IOException e) {
-                            System.err.println(e.getMessage());
-                        }
-                    }
-
+                    checkFileExists(file);
                     try (FileWriter writer = new FileWriter(file)) {
                         writer.write(Utilities.getAPIRequest(NBU_URL));
                         nbuCheckErr = false;
@@ -72,17 +61,7 @@ public class CurrencyJsonUpdate implements Runnable {
 
                 try {
                     File file = new File(ABSOLUTE_PATH_PRIVAT);
-
-                    if (!file.exists()) {
-                        file.getParentFile().mkdirs();
-
-                        try {
-                            file.createNewFile();
-                        } catch (IOException e) {
-                            System.err.println(e.getMessage());
-                        }
-                    }
-
+                    checkFileExists(file);
                     try (FileWriter writer = new FileWriter(file)) {
                         writer.write(Utilities.getAPIRequest(PRIVAT_URL));
                         privatCheckErr = false;
@@ -107,17 +86,7 @@ public class CurrencyJsonUpdate implements Runnable {
 
                 try {
                     File file = new File(ABSOLUTE_PATH_MONO);
-
-                    if (!file.exists()) {
-                        file.getParentFile().mkdirs();
-
-                        try {
-                            file.createNewFile();
-                        } catch (IOException e) {
-                            System.err.println(e.getMessage());
-                        }
-                    }
-
+                    checkFileExists(file);
                     try (FileWriter writer = new FileWriter(file)) {
                         writer.write(Utilities.getAPIRequest(MONO_URL));
                         monoCheckErr = false;
@@ -137,6 +106,18 @@ public class CurrencyJsonUpdate implements Runnable {
         new Thread(nbu).start();
         new Thread(privat).start();
         new Thread(mono).start();
+    }
+
+    private void checkFileExists(File file) {
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
+        }
     }
 
 }

@@ -1,15 +1,50 @@
 package ua.goit.telegrambot.api.service;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import lombok.Data;
+import ua.goit.telegrambot.api.CurrencyJsonUpdate;
 import ua.goit.telegrambot.api.dto.Currency;
+import ua.goit.telegrambot.utils.Utilities;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-public class PrivateBankCurrencyService implements CurrencyService{
+public class PrivateBankCurrencyService implements CurrencyService {
 
     @Override
-    public HashMap<String, Double> getRate() {
-        return null;
+    public Map<String, BigDecimal> getRate(Currency currency) throws IOException {
+
+        //take json from file
+        String takeJsonFromFile = Utilities.writeFromJsonFile(CurrencyJsonUpdate.getABSOLUTE_PATH_PRIVAT());
+
+        //Convert json => Java Object
+        Type typeToken = TypeToken
+                .getParameterized(List.class, CurrencyItemPrivat.class)
+                .getType();
+        List<CurrencyItemPrivat> currencyItemPrivats = new Gson().fromJson(takeJsonFromFile, typeToken);
+
+        //Find currency
+        BigDecimal privatBuy = BigDecimal.valueOf(currencyItemPrivats.stream()
+                .filter(it -> it.getCcy() == currency)
+                .map(CurrencyItemPrivat::getBuy)
+                .collect(Collectors.toList()).get(0));
+
+        BigDecimal privatSele = BigDecimal.valueOf(currencyItemPrivats.stream()
+                .filter(it -> it.getCcy() == currency)
+                .map(CurrencyItemPrivat::getSale)
+                .collect(Collectors.toList()).get(0));
+
+        Map<String, BigDecimal> rate = new HashMap<>();
+        rate.put("buy" + currency, privatBuy);
+        rate.put("sell" + currency, privatSele);
+
+        return rate;
     }
 
     @Data

@@ -2,9 +2,15 @@ package ua.goit.telegrambot.utils;
 
 import org.jsoup.Jsoup;
 import ua.goit.telegrambot.api.CurrencyJsonUpdate;
+import ua.goit.telegrambot.api.dto.Currency;
+import ua.goit.telegrambot.api.service.NBUCurrencyService;
 
-import java.io.IOException;
+import java.io.*;
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public final class Utilities {
 
@@ -47,4 +53,14 @@ public final class Utilities {
         }
     }
 
-}
+    //write from json
+    public static String writeFromJsonFile(String fileName) throws IOException {
+        String result;
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            result = reader.readLine();
+        }
+        return result;
+        }
+
+    }
+
