@@ -104,7 +104,7 @@ public class NotificationsTimeUkr extends BotCommand {
         InlineKeyboardButton disable_notifications = InlineKeyboardButton
                 .builder()
                 .text("Не сповіщати \uD83D\uDD15")
-                .callbackData("Не сповіщати")
+                .callbackData("Disable notifications")
                 .build();
 
         List<InlineKeyboardButton> keyboardButtonsRow4 = new ArrayList<>();

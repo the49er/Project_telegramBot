@@ -29,13 +29,13 @@ public class StartUkrCommand extends BotCommand{
         InlineKeyboardButton getInfo = InlineKeyboardButton
                 .builder()
                 .text("Отримати інформацію ℹ️")
-                .callbackData("Отримати інформацію")
+                .callbackData("Get ifo")
                 .build();
 
         InlineKeyboardButton settings = InlineKeyboardButton
                 .builder()
                 .text("Налаштування \uD83D\uDD27")
-                .callbackData("Налаштування")
+                .callbackData("Settings")
                 .build();
 
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();

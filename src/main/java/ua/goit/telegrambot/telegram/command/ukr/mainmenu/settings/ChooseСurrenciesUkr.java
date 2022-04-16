@@ -30,19 +30,19 @@ public class ChooseСurrenciesUkr extends BotCommand {
         InlineKeyboardButton usd = InlineKeyboardButton
                 .builder()
                 .text("USD")
-                .callbackData("Обрано USD")
+                .callbackData("Choose USD")
                 .build();
 
         InlineKeyboardButton eur = InlineKeyboardButton
                 .builder()
                 .text("EUR")
-                .callbackData("Обрано EUR")
+                .callbackData("Choose EUR")
                 .build();
 
         InlineKeyboardButton gbp = InlineKeyboardButton
                 .builder()
                 .text("GBP")
-                .callbackData("Обрано GBP")
+                .callbackData("Choose GBP")
                 .build();
 
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();

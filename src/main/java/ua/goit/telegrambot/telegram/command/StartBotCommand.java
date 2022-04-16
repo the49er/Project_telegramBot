@@ -36,7 +36,7 @@ public class StartBotCommand extends BotCommand {
                 InlineKeyboardButton chooseUKR = InlineKeyboardButton
                 .builder()
                 .text("Українська\uD83C\uDDFA\uD83C\uDDE6")
-                .callbackData("Українська")
+                .callbackData("Ukrainian")
                 .build();
 
         InlineKeyboardMarkup keyboard = InlineKeyboardMarkup

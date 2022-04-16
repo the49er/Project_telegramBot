@@ -30,19 +30,19 @@ public class ChooseABankUkr extends BotCommand {
         InlineKeyboardButton monoBank = InlineKeyboardButton
                 .builder()
                 .text("Монобанк")
-                .callbackData("Обрати Монобанк")
+                .callbackData("Choose Monobank")
                 .build();
 
         InlineKeyboardButton privatBank = InlineKeyboardButton
                 .builder()
                 .text("Приватбанк")
-                .callbackData("Обрати Приватбанк")
+                .callbackData("Choose Privatbank")
                 .build();
 
         InlineKeyboardButton nbuExRate = InlineKeyboardButton
                 .builder()
                 .text("НБУ")
-                .callbackData("Обрати НБУ")
+                .callbackData("Choose NBU")
                 .build();
 
 

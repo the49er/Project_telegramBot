@@ -12,6 +12,13 @@ import ua.goit.telegrambot.telegram.command.eng.mainmenu.settings.ChooseABank;
 import ua.goit.telegrambot.telegram.command.eng.mainmenu.settings.ChooseСurrencies;
 import ua.goit.telegrambot.telegram.command.eng.mainmenu.settings.NotificationsTime;
 import ua.goit.telegrambot.telegram.command.eng.mainmenu.settings.NumberOfChars;
+import ua.goit.telegrambot.telegram.command.ukr.StartUkrCommand;
+import ua.goit.telegrambot.telegram.command.ukr.mainmenu.GetInfoCommandUkr;
+import ua.goit.telegrambot.telegram.command.ukr.mainmenu.SettingsCommandUkr;
+import ua.goit.telegrambot.telegram.command.ukr.mainmenu.settings.ChooseABankUkr;
+import ua.goit.telegrambot.telegram.command.ukr.mainmenu.settings.ChooseСurrenciesUkr;
+import ua.goit.telegrambot.telegram.command.ukr.mainmenu.settings.NotificationsTimeUkr;
+import ua.goit.telegrambot.telegram.command.ukr.mainmenu.settings.NumberOfCharsUkr;
 
 import java.util.List;
 
@@ -22,17 +29,27 @@ public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
 
         //language menu
         register(new StartEngCommand());
-        //register(new StartUkrCommand());
+        register(new StartUkrCommand());
 
         //eng main menu
         register(new SettingsCommand());
         register(new GetInfoCommand());
+
+        //ukr main menu
+        register(new SettingsCommandUkr());
+        register(new GetInfoCommandUkr());
 
         //eng settings menu
         register(new NotificationsTime());
         register(new ChooseABank());
         register(new NumberOfChars());
         register(new ChooseСurrencies());
+
+        //ukr settings menu
+        register(new NotificationsTimeUkr());
+        register(new ChooseABankUkr());
+        register(new NumberOfCharsUkr());
+        register(new ChooseСurrenciesUkr());
     }
 
     @Override

@@ -10,7 +10,7 @@ import ua.goit.telegrambot.ui.PrintCurrencyService;
 public class GetInfoCommandUkr extends BotCommand {
 
     public GetInfoCommandUkr() {
-        super("getInfoUkr", "Отримати інформацію");
+        super("getInfoukr", "Отримати інформацію");
     }
 
     @Override

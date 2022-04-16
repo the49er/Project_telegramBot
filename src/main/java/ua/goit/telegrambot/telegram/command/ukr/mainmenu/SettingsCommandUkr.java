@@ -31,25 +31,25 @@ public class SettingsCommandUkr extends BotCommand {
         InlineKeyboardButton bank = InlineKeyboardButton
                 .builder()
                 .text("Банк")
-                .callbackData("Оберіть банк")
+                .callbackData("Choose bank")
                 .build();
 
         InlineKeyboardButton currencies = InlineKeyboardButton
                 .builder()
                 .text("Валюти")
-                .callbackData("Валюти")
+                .callbackData("Currencies")
                 .build();
 
         InlineKeyboardButton notificationTime = InlineKeyboardButton
                 .builder()
                 .text("Сповіщення")
-                .callbackData("Час сповіщення")
+                .callbackData("Notification time")
                 .build();
 
         InlineKeyboardButton numberOfSymb = InlineKeyboardButton
                 .builder()
                 .text("Округлення")
-                .callbackData("Кількість знаків після коми")
+                .callbackData("Number of symbols after comma")
                 .build();
 
 
