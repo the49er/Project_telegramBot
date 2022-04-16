@@ -12,60 +12,58 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChooseABank extends BotCommand {
+public class ChooseСurrenciesUkr extends BotCommand {
 
-    public ChooseABank(){
-        super("bank","Оберіть банк");
+    public ChooseСurrenciesUkr(){
+        super("choosecurrenciesukr","Яка валюта?");
     }
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
 
-        String chooseSettingsMessage = "Будь ласка, оберіть банк ";
+        String chooseSettingsMessage = "Оберіть, будь ласка, потрібну валюту.";
 
         SendMessage message = new SendMessage();
         message.setText(chooseSettingsMessage);
         message.setChatId(Long.toString(chat.getId()));
-
-        InlineKeyboardButton monoBank = InlineKeyboardButton
+        //✅
+        InlineKeyboardButton usd = InlineKeyboardButton
                 .builder()
-                .text("Монобанк")
-                .callbackData("Обрати Монобанк")
+                .text("USD")
+                .callbackData("Обрано USD")
                 .build();
 
-        InlineKeyboardButton privatBank = InlineKeyboardButton
+        InlineKeyboardButton eur = InlineKeyboardButton
                 .builder()
-                .text("Приватбанк")
-                .callbackData("Обрати Приватбанк")
+                .text("EUR")
+                .callbackData("Обрано EUR")
                 .build();
 
-        InlineKeyboardButton nbuExRate = InlineKeyboardButton
+        InlineKeyboardButton gbp = InlineKeyboardButton
                 .builder()
-                .text("НБУ")
-                .callbackData("Обрати НБУ")
+                .text("GBP")
+                .callbackData("Обрано GBP")
                 .build();
-
-
 
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
-        keyboardButtonsRow1.add(monoBank);
+        keyboardButtonsRow1.add(usd);
 
         List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList<>();
-        keyboardButtonsRow2.add(privatBank);
+        keyboardButtonsRow2.add(eur);
 
         List<InlineKeyboardButton> keyboardButtonsRow3 = new ArrayList<>();
-        keyboardButtonsRow3.add(nbuExRate);
+        keyboardButtonsRow3.add(gbp);
 
 
-        List<List<InlineKeyboardButton>> chooseABankKeyboard = new ArrayList<>();
-        chooseABankKeyboard.add(keyboardButtonsRow1);
-        chooseABankKeyboard.add(keyboardButtonsRow2);
-        chooseABankKeyboard.add(keyboardButtonsRow3);
+        List<List<InlineKeyboardButton>> currencyKeyboard = new ArrayList<>();
+        currencyKeyboard.add(keyboardButtonsRow1);
+        currencyKeyboard.add(keyboardButtonsRow2);
+        currencyKeyboard.add(keyboardButtonsRow3);
 
 
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
 
-        markup.setKeyboard(chooseABankKeyboard);
+        markup.setKeyboard(currencyKeyboard);
 
         message.setReplyMarkup(markup);
 
