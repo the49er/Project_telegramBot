@@ -17,20 +17,35 @@ public class StartEngCommand implements GeneralBotCommand {
     String userName;
 
     public SendMessage getMessage() {
-        String helloText = "This bot will help you get the current exchange rate.";
+        log.info("open startEng menu");
+        String helloText = "This TelegramBot provides you with current exchange rate.";
+
         SendMessage message = new SendMessage();
         message.setText(helloText);
         message.setChatId(Long.toString(this.chatId));
-        InlineKeyboardButton getInfo = InlineKeyboardButton.builder().text("Get info ℹ️").callbackData("getInfo").build();
-        InlineKeyboardButton settings = InlineKeyboardButton.builder().text("Settings \ud83d\udd27").callbackData("settings").build();
-        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+
+        InlineKeyboardButton getInfo = InlineKeyboardButton
+                .builder()
+                .text("Get info ℹ️")
+                .callbackData("getInfo")
+                .build();
+
+        InlineKeyboardButton settings = InlineKeyboardButton
+                .builder()
+                .text("Settings \ud83d\udd27")
+                .callbackData("settings")
+                .build();
+
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList();
         keyboardButtonsRow1.add(getInfo);
         List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList();
         keyboardButtonsRow2.add(settings);
+
         List<List<InlineKeyboardButton>> keyboard = new ArrayList();
         keyboard.add(keyboardButtonsRow1);
         keyboard.add(keyboardButtonsRow2);
+
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         markup.setKeyboard(keyboard);
         message.setReplyMarkup(markup);
         return message;

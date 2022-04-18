@@ -30,18 +30,38 @@ public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
 
     @Override
     public void processNonCommandUpdate(Update update) {
-        Message msg = update.getCallbackQuery().getMessage();
-        Long chatId = msg.getChatId();
-        String userName = getUserName(msg);
-        SendMessage answer = null;
+
+        SendMessage answer = new SendMessage();
         if (update.hasCallbackQuery()) {
+            Message msgCallBackQuery = update.getCallbackQuery().getMessage();
+            Long chatIdForCallBackQuery = msgCallBackQuery.getChatId();
+            String userName = getUserName(msgCallBackQuery);
             String callbackQuery = update.getCallbackQuery().getData();
-            answer = new NonCommand(callbackQuery,chatId, userName).getAnswer();
-            }
+            log.info("received callBackQuery: " + callbackQuery + "\nfrom: " + userName + "\nchatId #: " + Long.toString(chatIdForCallBackQuery));
+            answer = new NonCommand(callbackQuery, chatIdForCallBackQuery, userName).getAnswer();
+
+        }else if (update.hasMessage()){
+
+            Message msgText = update.getMessage();
+            Long chatIdForTextMsg = msgText.getChatId();
+            String strMsg = msgText.getText();
+            String userName = getUserName(msgText);
+            log.info("received callBackQuery: " + msgText + "from: " + userName + "chatId #: " + Long.toString(chatIdForTextMsg));
+            answer.setChatId(Long.toString(chatIdForTextMsg));
+            answer.setText(strMsg);
+        }else {
+            log.info("wrong request");
+            update.getMessage().getChatId();
+            String wrongRequest = "Please write '/start'";
+            answer.setText(wrongRequest);
+            answer.setChatId(Long.toString(update.getMessage().getChatId()));
+        }
+
         try {
             execute(answer);
         } catch (TelegramApiException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            log.error("exception");
         }
     }
 

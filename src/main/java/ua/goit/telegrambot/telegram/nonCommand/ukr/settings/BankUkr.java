@@ -18,23 +18,43 @@ public class BankUkr implements GeneralBotCommand {
     String userName;
 
     public SendMessage getMessage() {
-        String helloText = "Будь-ласка оберіть банк";
+        log.info("open BankUkr menu");
+        String helloText = "Будь ласка, оберіть банківську установу";
+
         SendMessage message = new SendMessage();
         message.setText(helloText);
         message.setChatId(Long.toString(this.chatId));
-        InlineKeyboardButton monoBank = InlineKeyboardButton.builder().text(this.checkout.equals("monobank") ? "✅ Моно Банк" : "Моно Банк").callbackData("setBankMonoBank").build();
-        InlineKeyboardButton nBU = InlineKeyboardButton.builder().text(this.checkout.equals("nbu") ? "✅ НБУ" : "НБУ").callbackData("setBankNBU").build();
-        InlineKeyboardButton privat = InlineKeyboardButton.builder().text(this.checkout.equals("privat") ? "✅ Приват" : "Приват").callbackData("setBankPrivat").build();
+
+        InlineKeyboardButton monoBank = InlineKeyboardButton
+                .builder()
+                .text(this.checkout.equals("monobank") ? "✅ Моно Банк" : "Моно Банк")
+                .callbackData("setBankMonoBank")
+                .build();
+
+        InlineKeyboardButton nbu = InlineKeyboardButton
+                .builder()
+                .text(this.checkout.equals("nbu") ? "✅ НБУ" : "НБУ")
+                .callbackData("setBankNBU")
+                .build();
+
+        InlineKeyboardButton privat = InlineKeyboardButton
+                .builder()
+                .text(this.checkout.equals("privat") ? "✅ Приват" : "Приват")
+                .callbackData("setBankPrivat")
+                .build();
+
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList();
         keyboardButtonsRow1.add(monoBank);
         List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList();
-        keyboardButtonsRow2.add(nBU);
+        keyboardButtonsRow2.add(nbu);
         List<InlineKeyboardButton> keyboardButtonsRow3 = new ArrayList();
         keyboardButtonsRow3.add(privat);
+
         List<List<InlineKeyboardButton>> settingsKeyboard = new ArrayList();
         settingsKeyboard.add(keyboardButtonsRow1);
         settingsKeyboard.add(keyboardButtonsRow2);
         settingsKeyboard.add(keyboardButtonsRow3);
+
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         markup.setKeyboard(settingsKeyboard);
         message.setReplyMarkup(markup);

@@ -17,14 +17,34 @@ public class SettingsUkrCommand implements GeneralBotCommand {
     String userName;
 
     public SendMessage getMessage() {
+        log.info("open settingsUkr menu");
         String helloText = "Налаштування";
+
         SendMessage message = new SendMessage();
         message.setText(helloText);
         message.setChatId(Long.toString(this.chatId));
-        InlineKeyboardButton numberOfSymb = InlineKeyboardButton.builder().text("Округлення").callbackData("roundingUkr").build();
-        InlineKeyboardButton bank = InlineKeyboardButton.builder().text("Банк").callbackData("bankUkr").build();
-        InlineKeyboardButton currencies = InlineKeyboardButton.builder().text("Валюта").callbackData("currencyUkr").build();
-        InlineKeyboardButton notificationTime = InlineKeyboardButton.builder().text("Повідомлення").callbackData("notificationsUkr").build();
+        InlineKeyboardButton numberOfSymb = InlineKeyboardButton.builder()
+                .text("Заокруглення")
+                .callbackData("roundingUkr")
+                .build();
+
+        InlineKeyboardButton bank = InlineKeyboardButton
+                .builder()
+                .text("Банк")
+                .callbackData("bankUkr")
+                .build();
+
+        InlineKeyboardButton currencies = InlineKeyboardButton
+                .builder()
+                .text("Валюта")
+                .callbackData("currencyUkr")
+                .build();
+
+        InlineKeyboardButton notificationTime = InlineKeyboardButton.builder()
+                .text("Нагадування")
+                .callbackData("notificationsUkr")
+                .build();
+
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList();
         keyboardButtonsRow1.add(numberOfSymb);
         List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList();
@@ -33,11 +53,13 @@ public class SettingsUkrCommand implements GeneralBotCommand {
         keyboardButtonsRow3.add(currencies);
         List<InlineKeyboardButton> keyboardButtonsRow4 = new ArrayList();
         keyboardButtonsRow4.add(notificationTime);
+
         List<List<InlineKeyboardButton>> settingsKeyboard = new ArrayList();
         settingsKeyboard.add(keyboardButtonsRow1);
         settingsKeyboard.add(keyboardButtonsRow2);
         settingsKeyboard.add(keyboardButtonsRow3);
         settingsKeyboard.add(keyboardButtonsRow4);
+
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         markup.setKeyboard(settingsKeyboard);
         message.setReplyMarkup(markup);
