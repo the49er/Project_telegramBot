@@ -1,38 +1,21 @@
 package ua.goit.telegrambot.telegram;
 
+import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import ua.goit.telegrambot.telegram.command.eng.mainmenu.GetInfoCommand;
-import ua.goit.telegrambot.telegram.command.eng.mainmenu.SettingsCommand;
+import ua.goit.telegrambot.telegram.nonCommand.NonCommand;
 import ua.goit.telegrambot.telegram.command.StartBotCommand;
-import ua.goit.telegrambot.telegram.command.eng.StartEngCommand;
-import ua.goit.telegrambot.telegram.command.eng.mainmenu.settings.ChooseABank;
-import ua.goit.telegrambot.telegram.command.eng.mainmenu.settings.ChooseСurrencies;
-import ua.goit.telegrambot.telegram.command.eng.mainmenu.settings.NotificationsTime;
-import ua.goit.telegrambot.telegram.command.eng.mainmenu.settings.NumberOfChars;
 
-import java.util.List;
-
+@Slf4j
 public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
 
     public TelegramCurrencyBot() {
         register(new StartBotCommand());
 
-        //language menu
-        register(new StartEngCommand());
-        //register(new StartUkrCommand());
-
-        //eng main menu
-        register(new SettingsCommand());
-        register(new GetInfoCommand());
-
-        //eng settings menu
-        register(new NotificationsTime());
-        register(new ChooseABank());
-        register(new NumberOfChars());
-        register(new ChooseСurrencies());
     }
 
     @Override
@@ -47,45 +30,25 @@ public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
 
     @Override
     public void processNonCommandUpdate(Update update) {
-
+        Message msg = update.getCallbackQuery().getMessage();
+        Long chatId = msg.getChatId();
+        String userName = getUserName(msg);
+        SendMessage answer = null;
         if (update.hasCallbackQuery()) {
             String callbackQuery = update.getCallbackQuery().getData();
-//                //if(callbackQuery == "English"){
-//
-//                SendMessage responseMessage = new SendMessage();
-//                    responseMessage.getClass();
-            //}
-            System.out.println("callbackQuery = " + callbackQuery);
-        }
-
-        if (update.hasMessage() && update.getMessage().hasText()) {
-
-            String messageReceived = update.getMessage().getText();
-            long chat_id = update.getMessage().getChatId();
-
-
-            if (!(messageReceived.equals("/start"))) {
-                BotConstants.SEND_MESSAGE.setText("Sorry, I don't know this command!");
-                BotConstants.SEND_MESSAGE.setChatId(Long.toString(chat_id));
-                try {
-                    execute(BotConstants.SEND_MESSAGE);
-                } catch (TelegramApiException e) {
-                    e.printStackTrace();
-                }
-//            } else {
-//                BotConstants.SEND_MESSAGE.setText("Hi " + update.getMessage().getFrom().getFirstName() + "!\nThis bot will help you get the current exchange rate.");
-//                BotConstants.SEND_MESSAGE.setChatId(Long.toString(chat_id));
-//                try {
-//                    execute(BotConstants.SEND_MESSAGE);
-//                } catch (TelegramApiException e) {
-//                    e.printStackTrace();
-//                }
+            answer = new NonCommand(callbackQuery,chatId, userName).getAnswer();
             }
+        try {
+            execute(answer);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
         }
     }
 
-    @Override
-    public void onUpdatesReceived(List<Update> updates) {
-        super.onUpdatesReceived(updates);
+    private String getUserName(Message msg) {
+        User user = msg.getFrom();
+        String userName = user.getUserName();
+        return (userName != null) ? userName : String.format("%s %s", user.getLastName(), user.getFirstName());
     }
+
 }

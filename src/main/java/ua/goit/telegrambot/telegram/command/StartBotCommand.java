@@ -30,13 +30,13 @@ public class StartBotCommand extends BotCommand {
         InlineKeyboardButton chooseENG = InlineKeyboardButton
                 .builder()
                 .text("English\uD83C\uDDFA\uD83C\uDDF8")
-                .callbackData("English")
+                .callbackData("english")
                 .build();
 
-                InlineKeyboardButton chooseUKR = InlineKeyboardButton
+        InlineKeyboardButton chooseUKR = InlineKeyboardButton
                 .builder()
                 .text("Українська\uD83C\uDDFA\uD83C\uDDE6")
-                .callbackData("Українська")
+                .callbackData("ukrainian")
                 .build();
 
         InlineKeyboardMarkup keyboard = InlineKeyboardMarkup
