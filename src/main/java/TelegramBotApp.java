@@ -4,6 +4,7 @@ import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+import ua.goit.telegrambot.api.CurrencyJsonUpdate;
 import ua.goit.telegrambot.telegram.TelegramCurrencyBot;
 
 @Slf4j
@@ -21,6 +22,10 @@ public class TelegramBotApp {
             log.info("Catch: "+ e.getMessage());
 
         }
+
+        CurrencyJsonUpdate fileCurrencyJsonUpdate = new CurrencyJsonUpdate();
+        fileCurrencyJsonUpdate.run();
+        log.info("API Threads started");
 
     }
 }
