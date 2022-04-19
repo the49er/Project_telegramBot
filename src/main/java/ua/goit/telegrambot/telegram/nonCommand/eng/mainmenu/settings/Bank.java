@@ -13,6 +13,7 @@ import ua.goit.telegrambot.telegram.nonCommand.GeneralBotCommand;
 @Slf4j
 @AllArgsConstructor
 public class Bank implements GeneralBotCommand {
+
     String checkout;
     Long chatId;
     String userName;

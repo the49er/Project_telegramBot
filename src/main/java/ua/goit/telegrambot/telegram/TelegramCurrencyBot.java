@@ -12,6 +12,7 @@ import ua.goit.telegrambot.telegram.command.StartBotCommand;
 
 @Slf4j
 public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
+//    BotUser BotUser;
 
     public TelegramCurrencyBot() {
         register(new StartBotCommand());
@@ -62,6 +63,18 @@ public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
         } catch (TelegramApiException e) {
             //e.printStackTrace();
             log.error("exception");
+        }
+    }
+
+    public void sendNotification(Long chatId) {
+        SendMessage answer = new SendMessage();
+//        answer.setText(BotUser.getInfo());
+        answer.setText("The Real Text Comes Here");
+        answer.setChatId(chatId.toString());
+        try {
+            execute(answer);
+        } catch (TelegramApiException e) {
+            log.error("Haven't send the notifications text");
         }
     }
 
