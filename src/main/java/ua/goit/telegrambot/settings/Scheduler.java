@@ -51,7 +51,7 @@ public class Scheduler implements Runnable {
         }
 
 
-        UserService service = new UserService();
+        UserService service = UserService.getInstance();
         while (true) {
             calendar = new GregorianCalendar();
             int time = calendar.get(Calendar.HOUR_OF_DAY);

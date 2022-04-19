@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import ua.goit.telegrambot.settings.UserService;
 import ua.goit.telegrambot.telegram.nonCommand.GeneralBotCommand;
 
 import java.text.MessageFormat;
@@ -18,6 +19,7 @@ public class GetInfoUkrCommand implements GeneralBotCommand {
     String userName;
 
     public SendMessage getMessage() {
+        UserService service = UserService.getInstance();
         log.info("open BankUkr menu");
 
         String bankName = "МоноБанк";
@@ -26,8 +28,9 @@ public class GetInfoUkrCommand implements GeneralBotCommand {
         double purchaseRate = 27.55D;
         double saleRate = 27.95D;
 
-        String helloText = MessageFormat
-                .format("Курс обміну {0}: {1}\n Купівля: {2}\n Продаж: {3}", bankName, currencyPair, purchaseRate, saleRate);
+//        String helloText = MessageFormat
+//                .format("Курс обміну {0}: {1}\n Купівля: {2}\n Продаж: {3}", bankName, currencyPair, purchaseRate, saleRate);
+        String helloText = service.getInfo(Math.toIntExact(this.chatId)) + "(ukr)";
 
         SendMessage message = new SendMessage();
         message.setText(helloText);

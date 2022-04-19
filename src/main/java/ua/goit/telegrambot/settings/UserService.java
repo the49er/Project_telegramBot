@@ -3,11 +3,24 @@ package ua.goit.telegrambot.settings;
 import java.util.List;
 
 public class UserService {
-    private static volatile UserService user;
+    private static volatile UserService instance;
     private StorageOfUsers userStorage;
 
     public UserService() {
-        userStorage = new StorageOfUsers();
+        userStorage = StorageOfUsers.getInstance();
+    }
+
+    public static UserService getInstance() { //«блокировка с двойной проверкой» (Double-Checked Locking)
+        UserService result = instance;
+        if (result != null) {
+            return result;
+        }
+        synchronized (StorageOfUsers.class) {
+            if (instance == null) {
+                instance = new UserService();
+            }
+            return instance;
+        }
     }
 
     public void createUser(int userId){
@@ -16,6 +29,10 @@ public class UserService {
 
     public void setBank(int userId, String bank) {
         userStorage.get(userId).setBank(bank);
+    }
+
+    public String getBank(int userId){
+        return  userStorage.get(userId).getBank();
     }
 
     public void setRounding(int userId, int rounding){
@@ -76,14 +93,14 @@ public class UserService {
 
 
     public String getInfo(int userId){
-        String bank = userStorage.get(userId).getBank();
+        String bank = getBank(userId);
         boolean usd = getUsd(userId);
         boolean eur = getEur(userId);
         boolean rub = getRub(userId);
         int rounding = getRounding(userId);
         //получение курса валют
         //HashMap<String, Currency> currenciesData = data.getCurrenciesByBank(bank);
-        return "";//красивое фориматирование всех данных
+        return "test";//красивое фориматирование всех данных
     }
 
 }

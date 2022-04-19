@@ -10,6 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ua.goit.telegrambot.settings.UserService;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,10 +22,13 @@ public class StartBotCommand extends BotCommand {
 
     }
 
+    UserService service = new UserService();
+
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         log.info("/start");
         String helloText = "Please select your language.\nБудь ласка, оберіть мову.";
+        service.createUser(Math.toIntExact(chat.getId()));
 
         SendMessage message = new SendMessage();
         message.setText(helloText);
