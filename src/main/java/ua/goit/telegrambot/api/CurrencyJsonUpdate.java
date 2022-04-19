@@ -1,12 +1,13 @@
 package ua.goit.telegrambot.api;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import ua.goit.telegrambot.utils.Utilities;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+@Slf4j
 public class CurrencyJsonUpdate implements Runnable {
     @Getter
     private static final String ABSOLUTE_PATH_NBU = "src\\main\\resources\\Currency_NBU_rates.json";
@@ -35,6 +36,11 @@ public class CurrencyJsonUpdate implements Runnable {
             while (true) {
 
                 try {
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     File file = new File(ABSOLUTE_PATH_NBU);
                     checkFileExists(file);
                     try (FileWriter writer = new FileWriter(file)) {
@@ -60,6 +66,11 @@ public class CurrencyJsonUpdate implements Runnable {
             while (true) {
 
                 try {
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     File file = new File(ABSOLUTE_PATH_PRIVAT);
                     checkFileExists(file);
                     try (FileWriter writer = new FileWriter(file)) {
@@ -85,6 +96,11 @@ public class CurrencyJsonUpdate implements Runnable {
             while (true) {
 
                 try {
+                    try {
+                        Thread.sleep(400);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     File file = new File(ABSOLUTE_PATH_MONO);
                     checkFileExists(file);
                     try (FileWriter writer = new FileWriter(file)) {
@@ -104,8 +120,11 @@ public class CurrencyJsonUpdate implements Runnable {
             }
         };
         new Thread(nbu).start();
+        log.info("NBU API thread downloader has started");
         new Thread(privat).start();
+        log.info("Privat API thread downloader has started");
         new Thread(mono).start();
+        log.info("MonoBank API thread downloader has started");
     }
 
     private void checkFileExists(File file) {
