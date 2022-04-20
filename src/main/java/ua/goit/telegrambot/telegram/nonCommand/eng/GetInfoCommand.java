@@ -21,6 +21,7 @@ import ua.goit.telegrambot.telegram.nonCommand.GeneralBotCommand;
 public class GetInfoCommand implements GeneralBotCommand {
     Long chatId;
     String userName;
+    //BotUser botUser = new BotUser.getUserByChatId(chatId);
 
 
     public SendMessage getMessage() {

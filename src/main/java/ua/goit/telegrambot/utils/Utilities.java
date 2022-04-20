@@ -54,10 +54,12 @@ public final class Utilities {
     }
 
     //write from json
-    public static String writeFromJsonFile(String fileName) throws IOException {
-        String result;
+    public static String writeFromJsonFile(String fileName) {
+        String result = null;
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             result = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return result;
         }

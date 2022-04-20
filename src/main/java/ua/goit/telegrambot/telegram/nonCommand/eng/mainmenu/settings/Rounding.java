@@ -14,7 +14,7 @@ import ua.goit.telegrambot.telegram.nonCommand.GeneralBotCommand;
 @AllArgsConstructor
 public class Rounding implements GeneralBotCommand {
 
-    String checkout;
+    int checkout;
     Long chatId;
     String userName;
 
@@ -28,19 +28,19 @@ public class Rounding implements GeneralBotCommand {
 
         InlineKeyboardButton two = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("two") ? "✅ 2" : "2")
+                .text(checkout == 2 ? "✅ 2" : "2")
                 .callbackData("setRoundingTwo")
                 .build();
 
         InlineKeyboardButton three = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("three") ? "✅ 3" : "3")
+                .text(checkout == 3 ? "✅ 3" : "3")
                 .callbackData("setRoundingThree")
                 .build();
 
         InlineKeyboardButton four = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("four") ? "✅ 4" : "4")
+                .text(checkout == 4 ? "✅ 4" : "4")
                 .callbackData("setRoundingFour")
                 .build();
 

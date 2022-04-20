@@ -1,8 +1,9 @@
 package ua.goit.telegrambot.settings;
 
+//TODO telegram bot API has own User class -> please rename this entity to BotUser or smth
 public class User {
     private final int id;
-    private String bank;
+    private String bank; //TODO we have to make it ENUM or CONSTANT
     private boolean usd;
     private boolean eur;
     private boolean rub;
@@ -10,6 +11,7 @@ public class User {
     private boolean scheduler;
     private int schedulerTime;
     private boolean english; // if it false, then language is ukrainian
+    //TODO currency field is missing, need to be ENUM or CONSTANT
 
     public int getSchedulerTime() {
         return schedulerTime;
