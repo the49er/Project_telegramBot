@@ -7,7 +7,6 @@ import ua.goit.telegrambot.api.CurrencyJsonUpdate;
 import ua.goit.telegrambot.api.dto.Currency;
 import ua.goit.telegrambot.utils.Utilities;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 public class PrivateBankCurrencyService implements CurrencyService {
 
     @Override
-    public Map<String, BigDecimal> getRate(Currency currency) throws IOException {
+    public Map<String, BigDecimal> getRate(Currency currency) {
 
         //take json from file
         String takeJsonFromFile = Utilities.writeFromJsonFile(CurrencyJsonUpdate.getABSOLUTE_PATH_PRIVAT());
