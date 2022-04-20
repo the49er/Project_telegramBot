@@ -61,11 +61,11 @@ public class Scheduler implements Runnable {
             calendar = new GregorianCalendar();
             int time = calendar.get(Calendar.HOUR_OF_DAY);
             List<Integer> userIds = service.getUsersWithNotficationOnCurrentHour(time);
+
             for (Integer userId : userIds) {
                 bot.sendNotification(Long.valueOf(userId));
                 log.info("sent notification");
             }
-
             if (time >= 9 && time <= 17) {
                 Thread.sleep(3600000l);
             } else if (time >= 18) {

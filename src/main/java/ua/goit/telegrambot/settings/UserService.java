@@ -12,10 +12,6 @@ import java.math.RoundingMode;
 import java.text.MessageFormat;
 import java.util.List;
 
-import static java.math.BigDecimal.ROUND_CEILING;
-import static java.math.BigDecimal.ROUND_FLOOR;
-import static java.math.RoundingMode.UNNECESSARY;
-
 @Slf4j
 public class UserService {
     private static volatile UserService instance;
@@ -147,6 +143,7 @@ public class UserService {
 
             if (getUsd(userId)) {
                 BigDecimal purchaseRate = nbuCurrencyService.getRate(Currency.USD).get("rateUSD");
+//                String result1 = String.format("%.3f", purchaseRate.doubleValue());
                 result = MessageFormat
                         .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPairUsd, purchaseRate.round(new MathContext(rounding, RoundingMode.HALF_UP)));
 

@@ -134,42 +134,57 @@ public class NonCommand {
             case "9":
                 service.setScheduler(Math.toIntExact(chatId),true);
                 service.setSchedulerTime(Math.toIntExact(chatId),9);
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "10":
                 service.setScheduler(Math.toIntExact(chatId),true);
                 service.setSchedulerTime(Math.toIntExact(chatId),10);
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "11":
                 service.setScheduler(Math.toIntExact(chatId),true);
                 service.setSchedulerTime(Math.toIntExact(chatId),11);
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "12":
                 service.setScheduler(Math.toIntExact(chatId),true);
                 service.setSchedulerTime(Math.toIntExact(chatId),12);
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "13":
                 service.setScheduler(Math.toIntExact(chatId),true);
                 service.setSchedulerTime(Math.toIntExact(chatId),13);
                 answer = new StartEngCommand(chatId, userName).getMessage();
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "14":
                 service.setScheduler(Math.toIntExact(chatId),true);
                 service.setSchedulerTime(Math.toIntExact(chatId),14);
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "15":
                 service.setScheduler(Math.toIntExact(chatId),true);
                 service.setSchedulerTime(Math.toIntExact(chatId),15);
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "16":
                 service.setScheduler(Math.toIntExact(chatId),true);
                 service.setSchedulerTime(Math.toIntExact(chatId),16);
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "17":
                 service.setScheduler(Math.toIntExact(chatId),true);
                 service.setSchedulerTime(Math.toIntExact(chatId),17);
+                answer = new StartEngCommand(chatId, userName).getMessage();
+                break;
+            case "18":
+                service.setScheduler(Math.toIntExact(chatId),true);
+                service.setSchedulerTime(Math.toIntExact(chatId),18);
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "cancelNotifications":
                 service.setScheduler(Math.toIntExact(chatId),false);
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
 
         }

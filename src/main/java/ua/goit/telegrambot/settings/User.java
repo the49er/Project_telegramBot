@@ -33,7 +33,7 @@ public class User {
         gbp = false;
         rounding = 2;
         scheduler = true;
-        schedulerTime = 13;
+        schedulerTime = 9;
         isEnglish = true;
         isUkrainian = false;
     }
