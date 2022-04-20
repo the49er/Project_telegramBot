@@ -56,7 +56,7 @@ public class NonCommand {
                 answer = new Currency(service.getCurrency(Math.toIntExact(chatId)), chatId, userName).getMessage();
                 break;
             case "notifications":
-                answer = new Notifications(String.valueOf(service.getSchedulerTime(Math.toIntExact(chatId))),chatId, userName).getMessage();
+                answer = new Notifications(String.valueOf(service.getSchedulerTime(Math.toIntExact(chatId))), chatId, userName).getMessage();
                 break;
             case "ukrainian":
                 answer = new StartUkrCommand(chatId, userName).getMessage();
@@ -77,7 +77,7 @@ public class NonCommand {
                 answer = new CurrencyUkr("usd"/*TODO user.getCurreny()*/, chatId, userName).getMessage();
                 break;
             case "notificationsUkr":
-                answer = new NotificationsUkr(chatId, userName).getMessage();
+                answer = new NotificationsUkr(String.valueOf(service.getSchedulerTime(Math.toIntExact(chatId))), chatId, userName).getMessage();;
                 break;
             //Bank setup for user
             case "setBankMonoBank":

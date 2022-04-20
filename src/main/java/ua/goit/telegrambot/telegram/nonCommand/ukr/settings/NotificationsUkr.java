@@ -1,5 +1,6 @@
 package ua.goit.telegrambot.telegram.nonCommand.ukr.settings;
-
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -7,12 +8,10 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import ua.goit.telegrambot.telegram.nonCommand.GeneralBotCommand;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Slf4j
 @AllArgsConstructor
 public class NotificationsUkr implements GeneralBotCommand {
+    String checkout;
     Long chatId;
     String userName;
 
@@ -26,57 +25,62 @@ public class NotificationsUkr implements GeneralBotCommand {
 
         InlineKeyboardButton nine = InlineKeyboardButton
                 .builder()
-                .text("9")
-                .callbackData("setNotificationTimeNine")
+                .text(this.checkout.equals("9") ? "✅ 9" : "9")
+                .callbackData("setNine")
                 .build();
 
         InlineKeyboardButton ten = InlineKeyboardButton
                 .builder()
-                .text("10").callbackData("setNotificationTimeTen")
+                .text(this.checkout.equals("10") ? "✅ 10" : "10")
+                .callbackData("setTen")
                 .build();
 
         InlineKeyboardButton eleven = InlineKeyboardButton
                 .builder()
-                .text("11").callbackData("setNotificationTimeEleven")
+                .text(this.checkout.equals("11") ? "✅ 11" : "11")
+                .callbackData("setEleven")
                 .build();
 
         InlineKeyboardButton twelve = InlineKeyboardButton
                 .builder()
-                .text("12").callbackData("setNotificationTimeTwelve")
+                .text(this.checkout.equals("12") ? "✅ 12" : "12")
+                .callbackData("setTwelve")
                 .build();
 
         InlineKeyboardButton thirteen = InlineKeyboardButton
                 .builder()
-                .text("13").callbackData("setNotificationTimeThirteen")
+                .text(this.checkout.equals("13") ? "✅ 13" : "13")
+                .callbackData("setThirteen")
                 .build();
 
         InlineKeyboardButton fourteen = InlineKeyboardButton
                 .builder()
-                .text("14").callbackData("setNotificationTimeFourteen")
+                .text(this.checkout.equals("14") ? "✅ 14" : "14")
+                .callbackData("setFourteen")
                 .build();
 
         InlineKeyboardButton fifteen = InlineKeyboardButton
                 .builder()
-                .text("15")
-                .callbackData("setNotificationTimeFifteen")
+                .text(this.checkout.equals("15") ? "✅ 15" : "15")
+                .callbackData("setFifteen")
                 .build();
 
         InlineKeyboardButton sixteen = InlineKeyboardButton
                 .builder()
-                .text("16")
-                .callbackData("setNotificationTimeSixteen")
+                .text(this.checkout.equals("16") ? "✅ 16" : "16")
+                .callbackData("setSixteen")
                 .build();
 
         InlineKeyboardButton seventeen = InlineKeyboardButton
                 .builder()
-                .text("17")
-                .callbackData("setNotificationTimeSeventeed")
+                .text(this.checkout.equals("17") ? "✅ 17" : "17")
+                .callbackData("setSeventeen")
                 .build();
 
         InlineKeyboardButton eighteen = InlineKeyboardButton
                 .builder()
-                .text("18")
-                .callbackData("setNotificationTimeEighteen")
+                .text(this.checkout.equals("18") ? "✅ 18" : "18")
+                .callbackData("setEighteen")
                 .build();
 
         InlineKeyboardButton cancelNotifications = InlineKeyboardButton

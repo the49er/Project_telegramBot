@@ -1,8 +1,6 @@
 package ua.goit.telegrambot.telegram.nonCommand.eng.mainmenu.settings;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -27,25 +25,25 @@ public class Notifications implements GeneralBotCommand {
 
         InlineKeyboardButton nine = InlineKeyboardButton
                 .builder()
-                .text("9")
+                .text(this.checkout.equals("9") ? "✅ 9" : "9")
                 .callbackData("9")
                 .build();
 
         InlineKeyboardButton ten = InlineKeyboardButton
                 .builder()
-                .text("10")
+                .text(this.checkout.equals("10") ? "✅ 10" : "10")
                 .callbackData("10")
                 .build();
 
         InlineKeyboardButton eleven = InlineKeyboardButton
                 .builder()
-                .text("11")
+                .text(this.checkout.equals("11") ? "✅ 11" : "11")
                 .callbackData("11")
                 .build();
 
         InlineKeyboardButton twelve = InlineKeyboardButton
                 .builder()
-                .text("12")
+                .text(this.checkout.equals("12") ? "✅ 12" : "12")
                 .callbackData("12")
                 .build();
 
@@ -57,30 +55,31 @@ public class Notifications implements GeneralBotCommand {
 
         InlineKeyboardButton fourteen = InlineKeyboardButton
                 .builder()
-                .text("14")
+                .text(this.checkout.equals("14") ? "✅ 14" : "14")
                 .callbackData("14")
                 .build();
 
         InlineKeyboardButton fifteen = InlineKeyboardButton
                 .builder()
-                .text("15").callbackData("15")
+                .text(this.checkout.equals("15") ? "✅ 15" : "15")
+                .callbackData("15")
                 .build();
 
         InlineKeyboardButton sixteen = InlineKeyboardButton
                 .builder()
-                .text("16")
+                .text(this.checkout.equals("16") ? "✅ 16" : "16")
                 .callbackData("16")
                 .build();
 
         InlineKeyboardButton seventeen = InlineKeyboardButton
                 .builder()
-                .text("17")
+                .text(this.checkout.equals("17") ? "✅ 17" : "17")
                 .callbackData("17")
                 .build();
 
         InlineKeyboardButton eighteen = InlineKeyboardButton
                 .builder()
-                .text("18")
+                .text(this.checkout.equals("18") ? "✅ 18" : "18")
                 .callbackData("18")
                 .build();
 
