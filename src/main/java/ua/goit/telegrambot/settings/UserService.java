@@ -142,82 +142,81 @@ public class UserService {
         if (bank.equals("nbu")) {
 
             if (getUsd(userId)) {
-                BigDecimal purchaseRate = nbuCurrencyService.getRate(Currency.USD).get("rateUSD");
-//                String result1 = String.format("%.3f", purchaseRate.doubleValue());
+                double purchaseRate = nbuCurrencyService.getRate(Currency.USD).get("rateUSD");
+
                 result = MessageFormat
-                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPairUsd, purchaseRate.round(new MathContext(rounding, RoundingMode.HALF_UP)));
+                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPairUsd, purchaseRate);
 
             }
             if (getEur(userId)) {
-                BigDecimal purchaseRate = nbuCurrencyService.getRate(Currency.EUR).get("rateEUR");
+                double purchaseRate = nbuCurrencyService.getRate(Currency.EUR).get("rateEUR");
                 result = MessageFormat
-                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPairEur, purchaseRate.round(new MathContext(rounding, RoundingMode.HALF_UP)));
+                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPairEur, purchaseRate);
 
             }
             if (getGbp(userId)) {
-                BigDecimal purchaseRate = nbuCurrencyService.getRate(Currency.GBP).get("rateGBP");
+                double purchaseRate = nbuCurrencyService.getRate(Currency.GBP).get("rateGBP");
                 result = MessageFormat
-                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPairGbp, purchaseRate.round(new MathContext(rounding, RoundingMode.HALF_UP)));
+                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPairGbp, purchaseRate);
 
             }
         }
 
         if (bank.equals("monobank")) {
             if (getUsd(userId)) {
-                BigDecimal purchaseRate = monoCurrencyService.getRate(Currency.USD).get("buyUSD");
-                BigDecimal saleRate = monoCurrencyService.getRate(Currency.USD).get("SellUSD");
-                if (saleRate == null) {
+                double purchaseRate = monoCurrencyService.getRate(Currency.USD).get("buyUSD");
+                double saleRate = monoCurrencyService.getRate(Currency.USD).get("SellUSD");
+                if (saleRate == 0) {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Monobank", currencyPairUsd, purchaseRate.round(new MathContext(4, RoundingMode.HALF_UP)));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Monobank", currencyPairUsd, purchaseRate);
                 } else {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Monobank", currencyPairUsd, purchaseRate.round(new MathContext(4, RoundingMode.HALF_UP)), saleRate.round(new MathContext(4, RoundingMode.HALF_UP)));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Monobank", currencyPairUsd, purchaseRate, saleRate);
                 }
             }
             if (getEur(userId)) {
-                BigDecimal purchaseRate = monoCurrencyService.getRate(Currency.EUR).get("buyEUR");
-                BigDecimal saleRate = monoCurrencyService.getRate(Currency.EUR).get("SellEUR");
-                if (saleRate == null) {
+                double purchaseRate = monoCurrencyService.getRate(Currency.EUR).get("buyEUR");
+                double saleRate = monoCurrencyService.getRate(Currency.EUR).get("SellEUR");
+                if (saleRate == 0) {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Monobank", currencyPairEur, purchaseRate.round(new MathContext(rounding, RoundingMode.HALF_UP)));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Monobank", currencyPairEur, purchaseRate);
                 } else {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Monobank", currencyPairEur, purchaseRate.round(new MathContext(rounding, RoundingMode.HALF_UP)), saleRate.round(new MathContext(rounding, RoundingMode.HALF_UP)));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Monobank", currencyPairEur, purchaseRate, saleRate);
                 }
             }
             if (getGbp(userId)) {
-                BigDecimal purchaseRate = monoCurrencyService.getRate(Currency.GBP).get("crossGBP");
+                double purchaseRate = monoCurrencyService.getRate(Currency.GBP).get("crossGBP");
                 result = MessageFormat
-                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Monobank",currencyPairGbp, purchaseRate.round(new MathContext(rounding, RoundingMode.HALF_UP)));
+                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Monobank",currencyPairGbp, purchaseRate);
 
             }
         }
 
         if (bank.equals("privat")) {
             if (getUsd(userId)) {
-                BigDecimal purchaseRate = privateBankCurrencyService.getRate(Currency.USD).get("buyUSD");
-                BigDecimal saleRate = privateBankCurrencyService.getRate(Currency.USD).get("sellUSD");
-                if (saleRate == null) {
+                double purchaseRate = privateBankCurrencyService.getRate(Currency.USD).get("buyUSD");
+                double saleRate = privateBankCurrencyService.getRate(Currency.USD).get("sellUSD");
+                if (saleRate == 0) {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Private", currencyPairUsd, purchaseRate.round(new MathContext(rounding, RoundingMode.HALF_UP)));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Private", currencyPairUsd, purchaseRate);
                 } else {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Private", currencyPairUsd, purchaseRate.round(new MathContext(rounding, RoundingMode.HALF_UP)), saleRate.round(new MathContext(rounding, RoundingMode.HALF_UP)));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Private", currencyPairUsd, purchaseRate, saleRate);
                 }
             }
             if (getEur(userId)) {
-                BigDecimal purchaseRate = privateBankCurrencyService.getRate(Currency.EUR).get("sellEUR");
-                BigDecimal saleRate = privateBankCurrencyService.getRate(Currency.EUR).get("buyEUR");
-                if (saleRate == null) {
+                double purchaseRate = privateBankCurrencyService.getRate(Currency.EUR).get("sellEUR");
+                double saleRate = privateBankCurrencyService.getRate(Currency.EUR).get("buyEUR");
+                if (saleRate == 0) {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Privat", currencyPairEur, saleRate.round(new MathContext(rounding, RoundingMode.HALF_UP)));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Privat", currencyPairEur, saleRate);
                 } else {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Privat", currencyPairEur, saleRate.round(new MathContext(rounding, RoundingMode.HALF_UP)), purchaseRate.round(new MathContext(rounding, RoundingMode.HALF_UP)));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Privat", currencyPairEur, saleRate, purchaseRate);
                 }
             }
             if (getGbp(userId)) {
-//                BigDecimal purchaseRate = privateBankCurrencyService.getRate(Currency.GBP).get("crossGBP");
                 result = MessageFormat
                         .format("{0} exchange rate: {1}\n Purchase: ⏳\n Sale: ⏳ ", "Privat", currencyPairGbp);
 
