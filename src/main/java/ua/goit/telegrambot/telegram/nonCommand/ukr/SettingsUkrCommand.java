@@ -24,24 +24,24 @@ public class SettingsUkrCommand implements GeneralBotCommand {
         message.setText(helloText);
         message.setChatId(Long.toString(this.chatId));
         InlineKeyboardButton numberOfSymb = InlineKeyboardButton.builder()
-                .text("Заокруглення")
+                .text("Заокруглення ↩️")
                 .callbackData("roundingUkr")
                 .build();
 
         InlineKeyboardButton bank = InlineKeyboardButton
                 .builder()
-                .text("Банк")
+                .text("Банк \uD83C\uDFE6")
                 .callbackData("bankUkr")
                 .build();
 
         InlineKeyboardButton currencies = InlineKeyboardButton
                 .builder()
-                .text("Валюта")
+                .text("Валюта \uD83D\uDCB2")
                 .callbackData("currencyUkr")
                 .build();
 
         InlineKeyboardButton notificationTime = InlineKeyboardButton.builder()
-                .text("Нагадування")
+                .text("Нагадування \uD83D\uDCAC")
                 .callbackData("notificationsUkr")
                 .build();
 

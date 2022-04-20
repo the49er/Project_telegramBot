@@ -26,7 +26,7 @@ public class StartEngCommand implements GeneralBotCommand {
 
         InlineKeyboardButton getInfo = InlineKeyboardButton
                 .builder()
-                .text("Get info ℹ️")
+                .text("Get info \uD83D\uDCB1")
                 .callbackData("getInfo")
                 .build();
 

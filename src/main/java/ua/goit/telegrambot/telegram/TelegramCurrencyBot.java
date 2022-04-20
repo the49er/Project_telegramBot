@@ -37,7 +37,7 @@ public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
             Long chatIdForCallBackQuery = msgCallBackQuery.getChatId();
             String userName = getUserName(msgCallBackQuery);
             String callbackQuery = update.getCallbackQuery().getData();
-            log.info("received callBackQuery: " + callbackQuery + "\nfrom: " + userName + "\nchatId #: " + Long.toString(chatIdForCallBackQuery));
+            log.info("chatId #: " + Long.toString(chatIdForCallBackQuery) + "| rcvd callBackQuery: " + callbackQuery + " | from: " + userName);
             answer = new NonCommand(callbackQuery, chatIdForCallBackQuery, userName).getAnswer();
 
         }else if (update.hasMessage()){
@@ -46,7 +46,7 @@ public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
             Long chatIdForTextMsg = msgText.getChatId();
             String strMsg = msgText.getText();
             String userName = getUserName(msgText);
-            log.info("received callBackQuery: " + msgText + "from: " + userName + "chatId #: " + Long.toString(chatIdForTextMsg));
+            log.info("chatId #: " + Long.toString(chatIdForTextMsg) + " | rcvd callBackQuery: " + msgText + " | from: " + userName);
             answer.setChatId(Long.toString(chatIdForTextMsg));
             answer.setText(strMsg);
         }else {

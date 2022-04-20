@@ -26,7 +26,7 @@ public class StartUkrCommand implements GeneralBotCommand {
 
         InlineKeyboardButton getInfo = InlineKeyboardButton
                 .builder()
-                .text("Отримати інформацію ℹ️")
+                .text("Отримати інформацію \uD83D\uDCB1")
                 .callbackData("getInfoUkr")
                 .build();
 

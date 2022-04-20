@@ -18,7 +18,7 @@ public class NotificationsUkr implements GeneralBotCommand {
 
     public SendMessage getMessage() {
         log.info("open notificationUkr menu");
-        String helloText = "Будь ласка, оберіть час нагадування";
+        String helloText = "Будь ласка, оберіть час нагадування \uD83D\uDD58";
 
         SendMessage message = new SendMessage();
         message.setText(helloText);

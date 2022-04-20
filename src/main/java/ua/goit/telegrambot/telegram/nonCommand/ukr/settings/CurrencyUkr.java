@@ -19,7 +19,7 @@ public class CurrencyUkr implements GeneralBotCommand {
 
     public SendMessage getMessage() {
         log.info("open currencyUkr menu");
-        String helloText = "Будь ласка, оберіть валюту";
+        String helloText = "Будь ласка, оберіть валюту \uD83D\uDCB2";
 
         SendMessage message = new SendMessage();
         message.setText(helloText);

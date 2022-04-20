@@ -18,7 +18,7 @@ public class Notifications implements GeneralBotCommand {
 
     public SendMessage getMessage() {
         log.info("open notification menu");
-        String helloText = "Please choose the notifications time";
+        String helloText = "Please choose the notifications time \uD83D\uDD58";
 
         SendMessage message = new SendMessage();
         message.setText(helloText);

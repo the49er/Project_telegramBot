@@ -19,7 +19,7 @@ public class RoundingUkr implements GeneralBotCommand {
 
     public SendMessage getMessage() {
         log.info("roundingUkr option");
-        String helloText = "Будь ласка, оберіть необхідку кількість знаків після коми";
+        String helloText = "Будь ласка, оберіть необхідну кількість знаків після коми";
 
         SendMessage message = new SendMessage();
         message.setText(helloText);

@@ -1,5 +1,7 @@
 package ua.goit.telegrambot.telegram.nonCommand.eng;
 
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import ua.goit.telegrambot.api.dto.Currency;
+import ua.goit.telegrambot.api.service.MonoCurrencyService;
 import ua.goit.telegrambot.settings.UserService;
 import ua.goit.telegrambot.telegram.nonCommand.GeneralBotCommand;
 
@@ -23,15 +27,32 @@ public class GetInfoCommand implements GeneralBotCommand {
         UserService service = UserService.getInstance();
 
         log.info("receive getInfo response");
-        String bankName = "MonoBank";
-        String currencyPair = "USD/UAH";
+        String bankName = "NBU";
+        String currencyPair = "UAH/USD";
 
-        double purchaseRate = 27.55D;
-        double saleRate = 27.95D;
+        BigDecimal purchaseRate = null;
+        try {
+            purchaseRate = new MonoCurrencyService().getRate(Currency.USD).get("buyUSD");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BigDecimal saleRate = null;
+        try {
+            saleRate = new MonoCurrencyService().getRate(Currency.USD).get("sellUSD");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-//        String helloText = MessageFormat
-//                .format("The exchange rate in {0}: {1}\n Purchase: {2}\n Sale: {3}", bankName, currencyPair, purchaseRate, saleRate);
-        String helloText = service.getInfo(Math.toIntExact(chatId));
+        String helloText = "";
+        if (saleRate == null){
+            helloText = MessageFormat
+                    .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", bankName, currencyPair, purchaseRate);
+        } else {
+            helloText = MessageFormat
+                    .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", bankName, currencyPair, purchaseRate, saleRate);
+        }
+
+        //String helloText = service.getInfo(Math.toIntExact(chatId));
 
         SendMessage message = new SendMessage();
         message.setText(helloText);
@@ -39,7 +60,7 @@ public class GetInfoCommand implements GeneralBotCommand {
 
         InlineKeyboardButton getInfo = InlineKeyboardButton
                 .builder()
-                .text("Get info ℹ️")
+                .text("Get info \uD83D\uDCB1")
                 .callbackData("getInfo")
                 .build();
 

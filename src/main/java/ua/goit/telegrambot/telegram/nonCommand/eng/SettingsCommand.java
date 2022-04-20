@@ -26,24 +26,24 @@ public class SettingsCommand implements GeneralBotCommand {
 
         InlineKeyboardButton numberOfSymb = InlineKeyboardButton
                 .builder()
-                .text("Rounding")
+                .text("Rounding ↩️")
                 .callbackData("rounding")
                 .build();
 
         InlineKeyboardButton bank = InlineKeyboardButton
                 .builder()
-                .text("Bank").callbackData("bank")
+                .text("Bank \uD83C\uDFE6").callbackData("bank")
                 .build();
 
         InlineKeyboardButton currencies = InlineKeyboardButton
                 .builder()
-                .text("Currencies")
+                .text("Currencies \uD83D\uDCB2")
                 .callbackData("currency")
                 .build();
 
         InlineKeyboardButton notificationTime = InlineKeyboardButton
                 .builder()
-                .text("Notification").callbackData("notifications")
+                .text("Notification \uD83D\uDCAC").callbackData("notifications")
                 .build();
 
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList();

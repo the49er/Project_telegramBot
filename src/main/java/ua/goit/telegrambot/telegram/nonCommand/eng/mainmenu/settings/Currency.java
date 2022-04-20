@@ -19,7 +19,7 @@ public class Currency implements GeneralBotCommand {
 
     public SendMessage getMessage() {
         log.info("open currency menu");
-        String helloText = "Please choose the currency";
+        String helloText = "Please choose the currency \uD83D\uDCB2";
 
         SendMessage message = new SendMessage();
         message.setText(helloText);
