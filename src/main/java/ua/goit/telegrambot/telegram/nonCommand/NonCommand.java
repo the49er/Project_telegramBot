@@ -155,7 +155,6 @@ public class NonCommand {
                 service.setScheduler(Math.toIntExact(chatId),true);
                 service.setSchedulerTime(Math.toIntExact(chatId),13);
                 answer = new StartEngCommand(chatId, userName).getMessage();
-                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "14":
                 service.setScheduler(Math.toIntExact(chatId),true);

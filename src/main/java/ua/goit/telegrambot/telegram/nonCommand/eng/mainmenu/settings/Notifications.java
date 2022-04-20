@@ -80,7 +80,7 @@ public class Notifications implements GeneralBotCommand {
         InlineKeyboardButton eighteen = InlineKeyboardButton
                 .builder()
                 .text(this.checkout.equals("18") ? "✅ 18" : "18")
-                .callbackData("18")
+                .callbackData("20")
                 .build();
 
         InlineKeyboardButton cancelNotifications = InlineKeyboardButton

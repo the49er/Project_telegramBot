@@ -21,22 +21,6 @@ public class Scheduler implements Runnable {
         Calendar calendar = new GregorianCalendar();
         TelegramCurrencyBot bot = new TelegramCurrencyBot();
 
-//        if (calendar.get(Calendar.HOUR_OF_DAY) >= 0 && calendar.get(Calendar.HOUR_OF_DAY) < 8){
-//            calendar.set(Calendar.HOUR_OF_DAY, 9);
-//            calendar.set(Calendar.MINUTE, 0);
-//            calendar.set(Calendar.SECOND, 0);
-//            Long date = calendar.getTimeInMillis();
-//            Long delay = date - System.currentTimeMillis();
-//            Thread.sleep(delay);
-//        }else if (calendar.get(Calendar.HOUR_OF_DAY) > 18 && calendar.get(Calendar.HOUR_OF_DAY) < 24){
-//            calendar.add(Calendar.DAY_OF_MONTH, 1);
-//            calendar.set(Calendar.HOUR_OF_DAY, 9);
-//            calendar.set(Calendar.MINUTE, 0);
-//            calendar.set(Calendar.SECOND, 0);
-//            Long date = calendar.getTimeInMillis();
-//            Long delay = date - System.currentTimeMillis();
-//            Thread.sleep(delay);
-//        }
 
         if (calendar.get(Calendar.HOUR_OF_DAY) >= 0 && calendar.get(Calendar.HOUR_OF_DAY) < 8) {
             calendar.set(Calendar.HOUR_OF_DAY, 9);
@@ -57,10 +41,9 @@ public class Scheduler implements Runnable {
 
 
         UserService service = UserService.getInstance();
-//        Thread.sleep(1000);
+
         while (true) {
             calendar = new GregorianCalendar();
-            calendar.set(Calendar.HOUR_OF_DAY,15);
             int time = calendar.get(Calendar.HOUR_OF_DAY);
             List<Integer> userIds = service.getUsersWithNotficationOnCurrentHour(time);
 
@@ -85,4 +68,5 @@ public class Scheduler implements Runnable {
         }
     }
 }
+
 
