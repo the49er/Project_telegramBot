@@ -29,20 +29,20 @@ public class GetInfoUkrCommand implements GeneralBotCommand {
         String bankName = "NBU";
         String currencyPair = "UAH/USD";
 
-        BigDecimal purchaseRate = new MonoCurrencyService().getRate(Currency.USD).get("buyUSD");
-                BigDecimal saleRate = new MonoCurrencyService().getRate(Currency.USD).get("sellUSD");
+//        double purchaseRate = new MonoCurrencyService().getRate(Currency.USD).get("buyUSD");
+//        double saleRate = new MonoCurrencyService().getRate(Currency.USD).get("sellUSD");
 
-        String helloText = "";
-        if (saleRate == null){
-            helloText = MessageFormat
-                    .format("{0} курс обміну валют: {1}\n Купівля: {2}\n Продаж:  ⏳ ", bankName, currencyPair, purchaseRate);
-        } else {
-            helloText = MessageFormat
-                    .format("{0} курс обміну валют: {1}\n Купівля: {2}\n Продаж: {3}", bankName, currencyPair, purchaseRate, saleRate);
-            //String helloText = service.getInfo(Math.toIntExact(this.chatId)) + "(ukr)";
-        }
+//        String helloText = "GetInfoUkeCommand";
+//        if (saleRate == null){
+//            helloText = MessageFormat
+//                    .format("{0} курс обміну валют: {1}\n Купівля: {2}\n Продаж:  ⏳ ", bankName, currencyPair, purchaseRate);
+//        } else {
+//            helloText = MessageFormat
+//                    .format("{0} курс обміну валют: {1}\n Купівля: {2}\n Продаж: {3}", bankName, currencyPair, purchaseRate, saleRate);
+//            //String helloText = service.getInfo(Math.toIntExact(this.chatId)) + "(ukr)";
+//        }
         SendMessage message = new SendMessage();
-        message.setText(helloText);
+//        message.setText(helloText);
         message.setChatId(Long.toString(this.chatId));
 
         InlineKeyboardButton getInfo = InlineKeyboardButton

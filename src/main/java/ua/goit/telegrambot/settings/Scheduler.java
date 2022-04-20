@@ -38,14 +38,14 @@ public class Scheduler implements Runnable {
 //            Thread.sleep(delay);
 //        }
 
-        if (calendar.get(Calendar.HOUR_OF_DAY) >= 0 && calendar.get(Calendar.HOUR_OF_DAY) < 8){
+        if (calendar.get(Calendar.HOUR_OF_DAY) >= 0 && calendar.get(Calendar.HOUR_OF_DAY) < 8) {
             calendar.set(Calendar.HOUR_OF_DAY, 9);
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
             Long date = calendar.getTimeInMillis();
             Long delay = date - System.currentTimeMillis();
             Thread.sleep(delay);
-        }else if (calendar.get(Calendar.HOUR_OF_DAY) > 18 && calendar.get(Calendar.HOUR_OF_DAY) < 24){
+        } else if (calendar.get(Calendar.HOUR_OF_DAY) > 18 && calendar.get(Calendar.HOUR_OF_DAY) < 24) {
             calendar.add(Calendar.DAY_OF_MONTH, 1);
             calendar.set(Calendar.HOUR_OF_DAY, 9);
             calendar.set(Calendar.MINUTE, 0);
@@ -57,8 +57,10 @@ public class Scheduler implements Runnable {
 
 
         UserService service = UserService.getInstance();
+//        Thread.sleep(1000);
         while (true) {
             calendar = new GregorianCalendar();
+            calendar.set(Calendar.HOUR_OF_DAY,15);
             int time = calendar.get(Calendar.HOUR_OF_DAY);
             List<Integer> userIds = service.getUsersWithNotficationOnCurrentHour(time);
 
@@ -67,7 +69,10 @@ public class Scheduler implements Runnable {
                 log.info("sent notification");
             }
             if (time >= 9 && time <= 17) {
-                Thread.sleep(3600000l);
+                calendar.add(Calendar.HOUR_OF_DAY, 1);
+                Long addHour = calendar.getTimeInMillis();
+                Long delay = addHour - System.currentTimeMillis();
+                Thread.sleep(delay);
             } else if (time >= 18) {
                 calendar.add(Calendar.DAY_OF_MONTH, 1);
                 calendar.set(Calendar.HOUR_OF_DAY, 9);
@@ -80,3 +85,4 @@ public class Scheduler implements Runnable {
         }
     }
 }
+

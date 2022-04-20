@@ -27,15 +27,11 @@ public class GetRatesTest {
         System.out.println("privateBankCurrencyService.getRate(Currency.USD) = " + privateBankCurrencyService.getRate(Currency.USD));
         System.out.println("privateBankCurrencyService.getRate(Currency.EUR) = " + privateBankCurrencyService.getRate(Currency.EUR));
         System.out.println("\"Mono\" = " + "Mono");
-        Utilities.wait(3);
-        System.out.println("monoCurrencyService.getRate(Currency.USD) = " + monoCurrencyService.getRate(Currency.USD).get("buyEUR"));
+        System.out.println("monoCurrencyService.getRate(Currency.USD) = " + monoCurrencyService.getRate(Currency.USD));
         System.out.println("monoCurrencyService.getRate(Currency.EUR) = " + monoCurrencyService.getRate(Currency.EUR));
         System.out.println("monoCurrencyService.getRate(Currency.GBP) = " + monoCurrencyService.getRate(Currency.GBP));
 
-        double res =  nbuCurrencyService.getRate(Currency.USD).get("buyUSD");
 
-        double res3 = Math.round(res);
-        System.out.println(res3);
 
 
     }
