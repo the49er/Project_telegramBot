@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 [{"ccy":"USD","base_ccy":"UAH","buy":"29.25490","sale":"32.18000"},{"ccy":"EUR","base_ccy":"UAH","buy":"31.57920","sale":"34.77000"},{"ccy":"BTC","base_ccy":"USD","buy":"39215.7269","sale":"43343.6981"}]
+=======
+[{"ccy":"USD","base_ccy":"UAH","buy":"29.25490","sale":"32.18000"},{"ccy":"EUR","base_ccy":"UAH","buy":"31.57920","sale":"34.77000"},{"ccy":"BTC","base_ccy":"USD","buy":"39544.6979","sale":"43707.2977"}]
+>>>>>>> 69d8925a2a5b461b034796c75ed3f442f2d2e311

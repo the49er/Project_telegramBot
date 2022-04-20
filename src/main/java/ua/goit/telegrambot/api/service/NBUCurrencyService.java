@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class NBUCurrencyService implements CurrencyService {
 
     @Override
-    public Map<String, BigDecimal> getRate(Currency currency) {
+    public Map<String, Double> getRate(Currency currency) {
 
         //take json from file
         String takeJsonFromFile = Utilities.writeFromJsonFile(CurrencyJsonUpdate.getABSOLUTE_PATH_NBU());
@@ -29,12 +29,12 @@ public class NBUCurrencyService implements CurrencyService {
         List<CurrencyItemNBU> currencyItemsNBU = new Gson().fromJson(takeJsonFromFile, typeToken);
 
         //Find currency
-        BigDecimal currencyRate = BigDecimal.valueOf(currencyItemsNBU.stream()
+        double currencyRate = currencyItemsNBU.stream()
                 .filter(it -> it.getCc() == currency)
                 .map(CurrencyItemNBU::getRate)
-                .collect(Collectors.toList()).get(0));
+                .collect(Collectors.toList()).get(0);
 
-        Map<String, BigDecimal> rate = new HashMap<>();
+        Map<String, Double> rate = new HashMap<>();
         rate.put("rate" + currency, currencyRate);
 
         return rate;
