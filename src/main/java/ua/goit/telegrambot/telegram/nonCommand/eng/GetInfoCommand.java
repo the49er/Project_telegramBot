@@ -31,18 +31,10 @@ public class GetInfoCommand implements GeneralBotCommand {
         String bankName = "NBU";
         String currencyPair = "UAH/USD";
 
-        BigDecimal purchaseRate = null;
-        try {
-            purchaseRate = new MonoCurrencyService().getRate(Currency.USD).get("buyUSD");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        BigDecimal saleRate = null;
-        try {
-            saleRate = new MonoCurrencyService().getRate(Currency.USD).get("sellUSD");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        BigDecimal purchaseRate = new MonoCurrencyService().getRate(Currency.USD).get("buyUSD");
+
+        BigDecimal saleRate =  new MonoCurrencyService().getRate(Currency.USD).get("sellUSD");
 
         String helloText = "";
         if (saleRate == null){
