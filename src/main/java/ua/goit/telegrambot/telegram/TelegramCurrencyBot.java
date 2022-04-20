@@ -71,6 +71,7 @@ public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
         SendMessage answer = new SendMessage();
         answer.setText(service.getInfo(Math.toIntExact(chatId)));
         answer.setChatId(chatId.toString());
+        answer.setText("My Timer Is Working");
         try {
             execute(answer);
         } catch (TelegramApiException e) {

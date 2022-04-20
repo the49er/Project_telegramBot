@@ -6,7 +6,11 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import ua.goit.telegrambot.api.CurrencyJsonUpdate;
 import ua.goit.telegrambot.settings.Scheduler;
+import ua.goit.telegrambot.settings.testscheduler.SchedulerTest;
 import ua.goit.telegrambot.telegram.TelegramCurrencyBot;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 @Slf4j
 public class TelegramBotApp {
@@ -30,6 +34,12 @@ public class TelegramBotApp {
         Thread thread = new Thread(scheduler);
         thread.run();
         log.info("API Threads started");
+
+        //The Block Of Timer Code
+        Timer timer = new Timer();
+        TimerTask task = new SchedulerTest();
+        // scheduling the timer instance
+        timer.schedule(task, 1, 1000*60*60);
 
     }
 }

@@ -8,6 +8,8 @@ import ua.goit.telegrambot.api.service.NBUCurrencyService;
 import ua.goit.telegrambot.api.service.PrivateBankCurrencyService;
 import ua.goit.telegrambot.settings.User;
 import ua.goit.telegrambot.settings.UserService;
+import ua.goit.telegrambot.settings.testscheduler.SchedulerTest;
+import ua.goit.telegrambot.settings.testscheduler.UserForSchedulerTest;
 import ua.goit.telegrambot.telegram.nonCommand.eng.GetInfoCommand;
 import ua.goit.telegrambot.telegram.nonCommand.eng.SettingsCommand;
 import ua.goit.telegrambot.telegram.nonCommand.eng.StartEngCommand;
@@ -135,6 +137,7 @@ public class NonCommand {
                 service.setScheduler(Math.toIntExact(chatId),true);
                 service.setSchedulerTime(Math.toIntExact(chatId),9);
                 answer = new StartEngCommand(chatId, userName).getMessage();
+                new SchedulerTest().checkUsers(new UserForSchedulerTest()); //added for testing scheduler
                 break;
             case "10":
                 service.setScheduler(Math.toIntExact(chatId),true);
