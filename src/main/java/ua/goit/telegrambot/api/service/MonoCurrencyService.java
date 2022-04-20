@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class MonoCurrencyService implements CurrencyService {
 
     @Override
-    public Map<String, BigDecimal> getRate(Currency currency) {
+    public Map<String, Double> getRate(Currency currency) {
 
         //take json from file
         String takeJsonFromFile = Utilities.writeFromJsonFile(CurrencyJsonUpdate.getABSOLUTE_PATH_MONO());
@@ -36,26 +36,26 @@ public class MonoCurrencyService implements CurrencyService {
         List<CurrencyItemMono> currencyItemMono = new Gson().fromJson(replaceJson, typeToken);
 
         if (currency == Currency.GBP) {
-            BigDecimal monoCrossCurseGBP = BigDecimal.valueOf(currencyItemMono.stream()
+            double monoCrossCurseGBP = currencyItemMono.stream()
                     .filter(it -> it.getCurrencyCodeA() == currency)
                     .map(CurrencyItemMono::getRateCross)
-                    .collect(Collectors.toList()).get(0));
+                    .collect(Collectors.toList()).get(0);
 
-            Map<String, BigDecimal> rate = new HashMap<>();
+            Map<String, Double> rate = new HashMap<>();
             rate.put("cross" + currency, monoCrossCurseGBP);
             return rate;
         } else {
-            BigDecimal monoBuy = BigDecimal.valueOf(currencyItemMono.stream()
+            double monoBuy = currencyItemMono.stream()
                     .filter(it -> it.getCurrencyCodeA() == currency)
                     .map(CurrencyItemMono::getRateBuy)
-                    .collect(Collectors.toList()).get(0));
+                    .collect(Collectors.toList()).get(0);
 
-            BigDecimal monoSell = BigDecimal.valueOf(currencyItemMono.stream()
+            double monoSell = currencyItemMono.stream()
                     .filter(it -> it.getCurrencyCodeA() == Currency.EUR)
                     .map(CurrencyItemMono::getRateSell)
-                    .collect(Collectors.toList()).get(0));
+                    .collect(Collectors.toList()).get(0);
 
-            Map<String, BigDecimal> rate = new HashMap<>();
+            Map<String, Double> rate = new HashMap<>();
             rate.put("buy" + currency, monoBuy);
             rate.put("Sell" + currency, monoSell);
 
