@@ -36,11 +36,7 @@ public class CurrencyJsonUpdate implements Runnable {
             while (true) {
 
                 try {
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    threadSleep(3000);
                     File file = new File(ABSOLUTE_PATH_NBU);
                     checkFileExists(file);
                     try (FileWriter writer = new FileWriter(file)) {
@@ -55,7 +51,7 @@ public class CurrencyJsonUpdate implements Runnable {
                     System.err.println("Can't connect to NBU API");
                     nbuCheckErr = true;
                 } finally {
-                    Utilities.wait(360);
+                    threadSleep(360_000);
                 }
             }
         };
@@ -66,11 +62,7 @@ public class CurrencyJsonUpdate implements Runnable {
             while (true) {
 
                 try {
-                    try {
-                        Thread.sleep(300);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    threadSleep(4000);
                     File file = new File(ABSOLUTE_PATH_PRIVAT);
                     checkFileExists(file);
                     try (FileWriter writer = new FileWriter(file)) {
@@ -85,7 +77,7 @@ public class CurrencyJsonUpdate implements Runnable {
                     System.err.println("Can't connect to Privat API");
                     privatCheckErr = true;
                 } finally {
-                    Utilities.wait(360);
+                    threadSleep(360_000);
                 }
             }
         };
@@ -96,11 +88,7 @@ public class CurrencyJsonUpdate implements Runnable {
             while (true) {
 
                 try {
-                    try {
-                        Thread.sleep(400);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    threadSleep(5000);
                     File file = new File(ABSOLUTE_PATH_MONO);
                     checkFileExists(file);
                     try (FileWriter writer = new FileWriter(file)) {
@@ -115,7 +103,7 @@ public class CurrencyJsonUpdate implements Runnable {
                     System.err.println("Can't connect to Mono API");
                     monoCheckErr = true;
                 } finally {
-                    Utilities.wait(360);
+                    threadSleep(360_000);
                 }
             }
         };
@@ -125,6 +113,14 @@ public class CurrencyJsonUpdate implements Runnable {
         log.info("Privat API thread downloader has started");
         new Thread(mono).start();
         log.info("MonoBank API thread downloader has started");
+    }
+
+    private void threadSleep(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void checkFileExists(File file) {
