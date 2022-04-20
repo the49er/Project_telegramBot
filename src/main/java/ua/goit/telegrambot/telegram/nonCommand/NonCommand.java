@@ -25,6 +25,9 @@ import ua.goit.telegrambot.telegram.nonCommand.ukr.settings.CurrencyUkr;
 import ua.goit.telegrambot.telegram.nonCommand.ukr.settings.NotificationsUkr;
 import ua.goit.telegrambot.telegram.nonCommand.ukr.settings.RoundingUkr;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 @Slf4j
 @AllArgsConstructor
 public class NonCommand {
@@ -35,6 +38,8 @@ public class NonCommand {
     NBUCurrencyService nbuCurrencyService = new NBUCurrencyService();
     PrivateBankCurrencyService privateBankCurrencyService = new PrivateBankCurrencyService();
     MonoCurrencyService monoCurrencyService = new MonoCurrencyService();
+
+    Calendar calendar = GregorianCalendar.getInstance();
 
     public NonCommand(String data, Long chatId, String userName) {
         switch(data) {
@@ -137,7 +142,7 @@ public class NonCommand {
                 service.setScheduler(Math.toIntExact(chatId),true);
                 service.setSchedulerTime(Math.toIntExact(chatId),9);
                 answer = new StartEngCommand(chatId, userName).getMessage();
-                new SchedulerTest().checkUsers(new UserForSchedulerTest()); //added for testing scheduler
+                if (calendar.get(Calendar.HOUR_OF_DAY) == 9) new SchedulerTest().checkUsers(new UserForSchedulerTest()); //added for testing scheduler
                 break;
             case "10":
                 service.setScheduler(Math.toIntExact(chatId),true);
