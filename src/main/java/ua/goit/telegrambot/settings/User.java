@@ -13,7 +13,8 @@ public class User {
     private int rounding;
     private boolean scheduler;
     private int schedulerTime;
-    private boolean english; // if it false, then language is ukrainian
+    private boolean isEnglish;
+    private boolean isUkrainian;
     //TODO currency field is missing, need to be ENUM or CONSTANT
 
     public int getSchedulerTime() {
@@ -26,13 +27,15 @@ public class User {
 
     public User(int id) {
         this.id = id;
-        bank = "NBU";
+        bank = "nbu";
         usd = true;
         eur = false;
         gbp = false;
         rounding = 2;
         scheduler = true;
         schedulerTime = 13;
+        isEnglish = true;
+        isUkrainian = false;
     }
 
 //    public int getId() {
