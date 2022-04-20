@@ -3,7 +3,11 @@ package ua.goit.telegrambot.telegram.nonCommand;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import ua.goit.telegrambot.api.service.MonoCurrencyService;
+import ua.goit.telegrambot.api.service.NBUCurrencyService;
+import ua.goit.telegrambot.api.service.PrivateBankCurrencyService;
 import ua.goit.telegrambot.settings.User;
+import ua.goit.telegrambot.settings.UserService;
 import ua.goit.telegrambot.telegram.nonCommand.eng.GetInfoCommand;
 import ua.goit.telegrambot.telegram.nonCommand.eng.SettingsCommand;
 import ua.goit.telegrambot.telegram.nonCommand.eng.StartEngCommand;
@@ -23,7 +27,12 @@ import ua.goit.telegrambot.telegram.nonCommand.ukr.settings.RoundingUkr;
 @AllArgsConstructor
 public class NonCommand {
     SendMessage answer;
-    User user;
+
+    UserService service = UserService.getInstance();
+
+    NBUCurrencyService nbuCurrencyService = new NBUCurrencyService();
+    PrivateBankCurrencyService privateBankCurrencyService = new PrivateBankCurrencyService();
+    MonoCurrencyService monoCurrencyService = new MonoCurrencyService();
 
     public NonCommand(String data, Long chatId, String userName) {
         switch(data) {
@@ -37,16 +46,17 @@ public class NonCommand {
                 answer = new SettingsCommand(chatId, userName).getMessage();
                 break;
             case "rounding":
-                answer = new Rounding(user.getRounding(), chatId, userName).getMessage();
+                answer = new Rounding(service.getRounding(Math.toIntExact(chatId)),chatId, userName).getMessage();
                 break;
             case "bank":
-                answer = new Bank(user.getBank(), chatId, userName).getMessage();
+                answer = new Bank(service.getBank(Math.toIntExact(chatId)), chatId, userName).getMessage();
                 break;
             case "currency":
-                answer = new Currency("usd"/*TODO user.getCurreny()*/, chatId, userName).getMessage();
+//                answer = new Currency("usd"/*TODO user.getCurreny()*/, chatId, userName).getMessage();
+                answer = new Currency(service.getCurrency(Math.toIntExact(chatId)), chatId, userName).getMessage();
                 break;
             case "notifications":
-                answer = new Notifications(chatId, userName).getMessage();
+                answer = new Notifications(String.valueOf(service.getSchedulerTime(Math.toIntExact(chatId))),chatId, userName).getMessage();
                 break;
             case "ukrainian":
                 answer = new StartUkrCommand(chatId, userName).getMessage();
@@ -58,10 +68,10 @@ public class NonCommand {
                 answer = new SettingsUkrCommand(chatId, userName).getMessage();
                 break;
             case "roundingUkr":
-                answer = new RoundingUkr(user.getRounding(), chatId, userName).getMessage();
+                answer = new RoundingUkr(service.getRounding(Math.toIntExact(chatId)), chatId, userName).getMessage();
                 break;
             case "bankUkr":
-                answer = new BankUkr(user.getBank(), chatId, userName).getMessage();
+                answer = new BankUkr(service.getBank(Math.toIntExact(chatId)), chatId, userName).getMessage();
                 break;
             case "currencyUkr":
                 answer = new CurrencyUkr("usd"/*TODO user.getCurreny()*/, chatId, userName).getMessage();
@@ -71,73 +81,95 @@ public class NonCommand {
                 break;
             //Bank setup for user
             case "setBankMonoBank":
-                user.setBank("monobank");
+                service.setBank(Math.toIntExact(chatId),"monobank");
+//                answer.setText("Bank Monobank has been chosen");
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "setBankNBU":
-                user.setBank("nbu");
+                service.setBank(Math.toIntExact(chatId),"nbu");
+//                answer.setText("Bank nbu has been chosen");
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "setBankPrivat":
-                user.setBank("privat");
+                service.setBank(Math.toIntExact(chatId),"privat");
+//                answer.setText("Bank nbu has been chosen");
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             //Rounding setup for user
             case "setRoundingTwo":
-                user.setRounding(2);
+                service.setRounding(Math.toIntExact(chatId),2);
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "setRoundingThree":
-                user.setRounding(3);
+                service.setRounding(Math.toIntExact(chatId),3);
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "setRoundingFour":
-                user.setRounding(4);
+                service.setRounding(Math.toIntExact(chatId),4);
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             //Currency setup for user
             case "setCurrencyUSD":
+                service.setUsd(Math.toIntExact(chatId),true);
+                service.setEur(Math.toIntExact(chatId),false);
+                service.setGbp(Math.toIntExact(chatId),false);
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 //TODO setCurrency("usd") or BETTER setCurrency(CURRENCY.USD);
                 break;
             case "setCurrencyEUR":
+                service.setUsd(Math.toIntExact(chatId),false);
+                service.setEur(Math.toIntExact(chatId),true);
+                service.setGbp(Math.toIntExact(chatId),false);
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 //TODO setCurrency("eur") or BETTER setCurrency(CURRENCY.EUR);
                 break;
-            case "setCurrencyRUR":
+            case "setCurrencyGbp":
+                service.setUsd(Math.toIntExact(chatId),false);
+                service.setEur(Math.toIntExact(chatId),false);
+                service.setGbp(Math.toIntExact(chatId),true);
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 //TODO setCurrency("rur") or BETTER setCurrency(CURRENCY.RUR);
                 break;
             //Notifications setup for user
             case "9":
-                user.setScheduler(true);
-                user.setSchedulerTime(9);
+                service.setScheduler(Math.toIntExact(chatId),true);
+                service.setSchedulerTime(Math.toIntExact(chatId),9);
                 break;
             case "10":
-                user.setScheduler(true);
-                user.setSchedulerTime(10);
+                service.setScheduler(Math.toIntExact(chatId),true);
+                service.setSchedulerTime(Math.toIntExact(chatId),10);
                 break;
             case "11":
-                user.setScheduler(true);
-                user.setSchedulerTime(11);
+                service.setScheduler(Math.toIntExact(chatId),true);
+                service.setSchedulerTime(Math.toIntExact(chatId),11);
                 break;
             case "12":
-                user.setScheduler(true);
-                user.setSchedulerTime(12);
+                service.setScheduler(Math.toIntExact(chatId),true);
+                service.setSchedulerTime(Math.toIntExact(chatId),12);
                 break;
             case "13":
-                user.setScheduler(true);
-                user.setSchedulerTime(13);
+                service.setScheduler(Math.toIntExact(chatId),true);
+                service.setSchedulerTime(Math.toIntExact(chatId),13);
+                answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "14":
-                user.setScheduler(true);
-                user.setSchedulerTime(14);
+                service.setScheduler(Math.toIntExact(chatId),true);
+                service.setSchedulerTime(Math.toIntExact(chatId),14);
                 break;
             case "15":
-                user.setScheduler(true);
-                user.setSchedulerTime(15);
+                service.setScheduler(Math.toIntExact(chatId),true);
+                service.setSchedulerTime(Math.toIntExact(chatId),15);
                 break;
             case "16":
-                user.setScheduler(true);
-                user.setSchedulerTime(16);
+                service.setScheduler(Math.toIntExact(chatId),true);
+                service.setSchedulerTime(Math.toIntExact(chatId),16);
                 break;
             case "17":
-                user.setScheduler(true);
-                user.setSchedulerTime(17);
+                service.setScheduler(Math.toIntExact(chatId),true);
+                service.setSchedulerTime(Math.toIntExact(chatId),17);
                 break;
             case "cancelNotifications":
-                user.setScheduler(false);
+                service.setScheduler(Math.toIntExact(chatId),false);
                 break;
 
         }

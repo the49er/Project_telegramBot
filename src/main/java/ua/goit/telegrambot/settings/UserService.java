@@ -43,12 +43,12 @@ public class UserService {
         userStorage.get(userId).setUsd(usd);
     }
 
-    public void setEur(int userId, boolean usd){
-        userStorage.get(userId).setUsd(usd);
+    public void setEur(int userId, boolean eur){
+        userStorage.get(userId).setEur(eur);
     }
 
-    public void setRub(int userId, boolean usd){
-        userStorage.get(userId).setUsd(usd);
+    public void setGbp(int userId, boolean gbp){
+        userStorage.get(userId).setGbp(gbp);
     }
 
     public int getRounding(int userId){
@@ -63,8 +63,8 @@ public class UserService {
         return userStorage.get(userId).isEur();
     }
 
-    public boolean getRub(int userId) {
-        return userStorage.get(userId).isRub();
+    public boolean getGbp(int userId) {
+        return userStorage.get(userId).isGbp();
     }
 
     public boolean getScheduler(int userId) { return userStorage.get(userId).isScheduler(); }
@@ -79,24 +79,34 @@ public class UserService {
         userStorage.get(userId).setSchedulerTime(time);
     }
 
+    public String getCurrency(int userId){
+        if (getUsd(userId)){
+            return "usd";
+        }else if (getEur(userId)){
+            return "eur";
+        }else {
+            return "gbp";
+        }
+    }
+
     public List<Integer> getUsersWithNotficationOnCurrentHour(int time) {
         return userStorage.getUsersWithNotficationOnCurrentHour(time);
     }
 
-    public boolean getIsEnglish(int userId){
-        return userStorage.get(userId).getIsEnglish();
-    }
-
-    public void setIsEnglish(int userId, boolean english){
-        userStorage.get(userId).setIsEnglish(english);
-    }
+//    public boolean getIsEnglish(int userId){
+//        return userStorage.get(userId).getIsEnglish();
+//    }
+//
+//    public void setIsEnglish(int userId, boolean english){
+//        userStorage.get(userId).setIsEnglish(english);
+//    }
 
 
     public String getInfo(int userId){
         String bank = getBank(userId);
         boolean usd = getUsd(userId);
         boolean eur = getEur(userId);
-        boolean rub = getRub(userId);
+        boolean gbp = getGbp(userId);
         int rounding = getRounding(userId);
         //получение курса валют
         //HashMap<String, Currency> currenciesData = data.getCurrenciesByBank(bank);

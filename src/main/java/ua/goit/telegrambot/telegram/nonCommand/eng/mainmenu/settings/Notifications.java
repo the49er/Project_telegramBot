@@ -13,6 +13,7 @@ import ua.goit.telegrambot.telegram.nonCommand.GeneralBotCommand;
 @Slf4j
 @AllArgsConstructor
 public class Notifications implements GeneralBotCommand {
+    String checkout;
     Long chatId;
     String userName;
 
@@ -27,59 +28,60 @@ public class Notifications implements GeneralBotCommand {
         InlineKeyboardButton nine = InlineKeyboardButton
                 .builder()
                 .text("9")
-                .callbackData("setNotificationTimeNine")
+                .callbackData("9")
                 .build();
 
         InlineKeyboardButton ten = InlineKeyboardButton
                 .builder()
                 .text("10")
-                .callbackData("setNotificationTimeTen")
+                .callbackData("10")
                 .build();
 
         InlineKeyboardButton eleven = InlineKeyboardButton
                 .builder()
                 .text("11")
-                .callbackData("setNotificationTimeEleven")
+                .callbackData("11")
                 .build();
 
         InlineKeyboardButton twelve = InlineKeyboardButton
                 .builder()
                 .text("12")
-                .callbackData("setNotificationTimeTwelve")
+                .callbackData("12")
                 .build();
 
         InlineKeyboardButton thirteen = InlineKeyboardButton
                 .builder()
-                .text("13").callbackData("setNotificationTimeThirteen")
+                .text(this.checkout.equals("13") ? "✅ 13" : "13")
+                .callbackData("13")
                 .build();
 
         InlineKeyboardButton fourteen = InlineKeyboardButton
                 .builder()
                 .text("14")
-                .callbackData("setNotificationTimeFourteen")
+                .callbackData("14")
                 .build();
 
         InlineKeyboardButton fifteen = InlineKeyboardButton
                 .builder()
-                .text("15").callbackData("setNotificationTimeFifteen")
+                .text("15").callbackData("15")
                 .build();
 
         InlineKeyboardButton sixteen = InlineKeyboardButton
                 .builder()
                 .text("16")
-                .callbackData("setNotificationTimeSixteen")
+                .callbackData("16")
                 .build();
 
         InlineKeyboardButton seventeen = InlineKeyboardButton
                 .builder()
                 .text("17")
-                .callbackData("setNotificationTimeSeventeed")
+                .callbackData("17")
                 .build();
 
         InlineKeyboardButton eighteen = InlineKeyboardButton
                 .builder()
                 .text("18")
-                .callbackData("setNotificationTimeEighteen")
+                .callbackData("18")
                 .build();
 
         InlineKeyboardButton cancelNotifications = InlineKeyboardButton

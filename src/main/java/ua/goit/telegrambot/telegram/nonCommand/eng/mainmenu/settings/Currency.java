@@ -37,10 +37,10 @@ public class Currency implements GeneralBotCommand {
                 .callbackData("setCurrencyEUR")
                 .build();
 
-        InlineKeyboardButton rur = InlineKeyboardButton
+        InlineKeyboardButton gbp = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("rur") ? "✅ RUR" : "RUR")
-                .callbackData("setCurrencyRUR")
+                .text(this.checkout.equals("gbp") ? "✅ GBP" : "GBP")
+                .callbackData("setCurrencyGbp")
                 .build();
 
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList();
@@ -48,7 +48,7 @@ public class Currency implements GeneralBotCommand {
         List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList();
         keyboardButtonsRow2.add(eur);
         List<InlineKeyboardButton> keyboardButtonsRow3 = new ArrayList();
-        keyboardButtonsRow3.add(rur);
+        keyboardButtonsRow3.add(gbp);
 
         List<List<InlineKeyboardButton>> settingsKeyboard = new ArrayList();
         settingsKeyboard.add(keyboardButtonsRow1);

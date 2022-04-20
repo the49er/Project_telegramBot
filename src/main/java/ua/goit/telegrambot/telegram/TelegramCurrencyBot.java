@@ -7,12 +7,13 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ua.goit.telegrambot.settings.UserService;
 import ua.goit.telegrambot.telegram.nonCommand.NonCommand;
 import ua.goit.telegrambot.telegram.command.StartBotCommand;
 
 @Slf4j
 public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
-//    BotUser BotUser;
+    UserService service = UserService.getInstance();
 
     public TelegramCurrencyBot() {
         register(new StartBotCommand());
@@ -68,8 +69,7 @@ public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
 
     public void sendNotification(Long chatId) {
         SendMessage answer = new SendMessage();
-//        answer.setText(BotUser.getInfo());
-        answer.setText("The Real Text Comes Here");
+        answer.setText(service.getInfo(Math.toIntExact(chatId)));
         answer.setChatId(chatId.toString());
         try {
             execute(answer);
