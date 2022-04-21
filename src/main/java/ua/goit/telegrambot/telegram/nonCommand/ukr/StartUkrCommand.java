@@ -18,7 +18,7 @@ public class StartUkrCommand implements GeneralBotCommand {
 
     public SendMessage getMessage() {
         log.info("open startUkr menu");
-        String helloText = "Цей ТелеграмБот допоможе Вам отримати поточний курс валют.";
+        String helloText = "Головне меню: ";
 
         SendMessage message = new SendMessage();
         message.setText(helloText);

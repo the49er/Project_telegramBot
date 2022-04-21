@@ -25,61 +25,61 @@ public class NotificationsUkr implements GeneralBotCommand {
 
         InlineKeyboardButton nine = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("9") ? "✅ 9" : "9")
+                .text(this.checkout.equals("9") ? "\uD83D\uDD58 9:00" : "9:00")
                 .callbackData("setNine")
                 .build();
 
         InlineKeyboardButton ten = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("10") ? "✅ 10" : "10")
+                .text(this.checkout.equals("10") ? "\uD83D\uDD59 10:00" : "10:00")
                 .callbackData("setTen")
                 .build();
 
         InlineKeyboardButton eleven = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("11") ? "✅ 11" : "11")
+                .text(this.checkout.equals("11") ? "\uD83D\uDD5A 11:00" : "11:00")
                 .callbackData("setEleven")
                 .build();
 
         InlineKeyboardButton twelve = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("12") ? "✅ 12" : "12")
+                .text(this.checkout.equals("12") ? "\uD83D\uDD5B 12:00" : "12:00")
                 .callbackData("setTwelve")
                 .build();
 
         InlineKeyboardButton thirteen = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("13") ? "✅ 13" : "13")
+                .text(this.checkout.equals("13") ? "\uD83D\uDD50 13:00" : "13:00")
                 .callbackData("setThirteen")
                 .build();
 
         InlineKeyboardButton fourteen = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("14") ? "✅ 14" : "14")
+                .text(this.checkout.equals("14") ? "\uD83D\uDD51 14:00" : "14:00")
                 .callbackData("setFourteen")
                 .build();
 
         InlineKeyboardButton fifteen = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("15") ? "✅ 15" : "15")
+                .text(this.checkout.equals("15") ? "\uD83D\uDD52 15:00" : "15:00")
                 .callbackData("setFifteen")
                 .build();
 
         InlineKeyboardButton sixteen = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("16") ? "✅ 16" : "16")
+                .text(this.checkout.equals("16") ? "\uD83D\uDD53 16:00" : "16:00")
                 .callbackData("setSixteen")
                 .build();
 
         InlineKeyboardButton seventeen = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("17") ? "✅ 17" : "17")
+                .text(this.checkout.equals("17") ? "\uD83D\uDD54 17:00" : "17:00")
                 .callbackData("setSeventeen")
                 .build();
 
         InlineKeyboardButton eighteen = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("18") ? "✅ 18" : "18")
+                .text(this.checkout.equals("18") ? "\uD83D\uDD55 18:00" : "18:00")
                 .callbackData("setEighteen")
                 .build();
 

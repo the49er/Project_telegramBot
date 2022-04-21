@@ -18,7 +18,7 @@ public class StartEngCommand implements GeneralBotCommand {
 
     public SendMessage getMessage() {
         log.info("open startEng menu");
-        String helloText = "This TelegramBot provides you with current exchange rate.";
+        String helloText = "Main menu: ";
 
         SendMessage message = new SendMessage();
         message.setText(helloText);
