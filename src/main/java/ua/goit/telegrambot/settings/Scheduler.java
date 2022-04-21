@@ -41,14 +41,14 @@ public class Scheduler implements Runnable {
         UserService service = UserService.getInstance();
 
         while (true) {
-            log.info("thread to notify");
+            log.info("Notifications Thread has started");
             calendar = new GregorianCalendar();
             hour = calendar.get(Calendar.HOUR_OF_DAY);
             List<Integer> userIds = service.getUsersWithNotficationOnCurrentHour(hour);
 
             for (Integer userId : userIds) {
                 bot.sendNotification(Long.valueOf(userId));
-                log.info("sent notification");
+                log.info("Notification has been sent");
             }
             if (hour >= 18){
                 calendar.add(Calendar.HOUR_OF_DAY,1);

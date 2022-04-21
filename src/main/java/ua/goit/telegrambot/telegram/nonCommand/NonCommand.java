@@ -60,9 +60,9 @@ public class NonCommand {
                 answer = new Notifications(String.valueOf(service.getSchedulerTime(Math.toIntExact(chatId))), chatId, userName).getMessage();
                 break;
             case "ukrainian":
-                answer = new StartUkrCommand(chatId, userName).getMessage();
                 service.setEnglish(Math.toIntExact(chatId), false);
                 service.setUkrainian(Math.toIntExact(chatId), true);
+                answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "getInfoUkr":
                 answer = new GetInfoUkrCommand(chatId, userName).getMessage();
@@ -225,6 +225,7 @@ public class NonCommand {
                 break;
             case "cancelNotifications":
                 service.setScheduler(Math.toIntExact(chatId),false);
+                service.setSchedulerTime(Math.toIntExact(chatId),-1);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             //Notifications setup for user ENG
@@ -281,6 +282,7 @@ public class NonCommand {
                 break;
             case "cancelNotificationsUkr":
                 service.setScheduler(Math.toIntExact(chatId),false);
+                service.setSchedulerTime(Math.toIntExact(chatId),-1);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
 
         }

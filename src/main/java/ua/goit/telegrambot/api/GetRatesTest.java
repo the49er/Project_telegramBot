@@ -1,14 +1,11 @@
 package ua.goit.telegrambot.api;
 
 import lombok.SneakyThrows; // need to discuss
-import org.glassfish.jersey.message.internal.Utils;
 import ua.goit.telegrambot.api.dto.Currency;
 import ua.goit.telegrambot.api.service.MonoCurrencyService;
 import ua.goit.telegrambot.api.service.NBUCurrencyService;
 import ua.goit.telegrambot.api.service.PrivateBankCurrencyService;
-import ua.goit.telegrambot.utils.Utilities;
-
-import java.math.BigDecimal;
+import ua.goit.telegrambot.api.utils.Utilities;
 
 public class GetRatesTest {
     @SneakyThrows
