@@ -27,20 +27,20 @@ public class BankUkr implements GeneralBotCommand {
 
         InlineKeyboardButton monoBank = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("monobank") ? "✅ Моно Банк" : "Моно Банк")
-                .callbackData("setBankMonoBank")
+                .text(this.checkout.equals("monobank") ? "✅ МоноБанк" : "МоноБанк")
+                .callbackData("setBankMonoBankUkr")
                 .build();
 
         InlineKeyboardButton nbu = InlineKeyboardButton
                 .builder()
                 .text(this.checkout.equals("nbu") ? "✅ НБУ" : "НБУ")
-                .callbackData("setBankNBU")
+                .callbackData("setBankNbuUkr")
                 .build();
 
         InlineKeyboardButton privat = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("privat") ? "✅ Приват" : "Приват")
-                .callbackData("setBankPrivat")
+                .text(this.checkout.equals("privat") ? "✅ ПриватБанк" : "ПриватБанк")
+                .callbackData("setBankPrivatUkr")
                 .build();
 
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList();

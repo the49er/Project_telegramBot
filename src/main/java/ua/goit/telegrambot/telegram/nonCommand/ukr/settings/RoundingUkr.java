@@ -28,19 +28,19 @@ public class RoundingUkr implements GeneralBotCommand {
         InlineKeyboardButton two = InlineKeyboardButton
                 .builder()
                 .text(checkout == 2 ? "✅ 2" : "2")
-                .callbackData("setRoundingTwo")
+                .callbackData("setRoundingTwoUkr")
                 .build();
 
         InlineKeyboardButton three = InlineKeyboardButton
                 .builder()
                 .text(checkout == 3 ? "✅ 3" : "3")
-                .callbackData("setRoundingThree")
+                .callbackData("setRoundingThreeUkr")
                 .build();
 
         InlineKeyboardButton four = InlineKeyboardButton
                 .builder()
                 .text(checkout == 4 ? "✅ 4" : "4")
-                .callbackData("setRoundingFour").build();
+                .callbackData("setRoundingFourUkr").build();
 
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList();
         keyboardButtonsRow1.add(two);

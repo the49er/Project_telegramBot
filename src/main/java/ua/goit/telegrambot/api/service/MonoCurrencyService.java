@@ -5,10 +5,9 @@ import com.google.gson.reflect.TypeToken;
 import lombok.Data;
 import ua.goit.telegrambot.api.CurrencyJsonUpdate;
 import ua.goit.telegrambot.api.dto.Currency;
-import ua.goit.telegrambot.utils.Utilities;
+import ua.goit.telegrambot.api.utils.Utilities;
 
 import java.lang.reflect.Type;
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

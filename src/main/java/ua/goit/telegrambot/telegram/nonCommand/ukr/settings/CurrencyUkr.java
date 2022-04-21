@@ -28,19 +28,19 @@ public class CurrencyUkr implements GeneralBotCommand {
         InlineKeyboardButton usd = InlineKeyboardButton
                 .builder()
                 .text(this.checkout.equals("usd") ? "✅ USD" : "USD")
-                .callbackData("setCurrencyUSD")
+                .callbackData("setCurrencyUsdUkr")
                 .build();
 
         InlineKeyboardButton eur = InlineKeyboardButton
                 .builder()
                 .text(this.checkout.equals("eur") ? "✅ EUR" : "EUR")
-                .callbackData("setCurrencyEUR")
+                .callbackData("setCurrencyEurUkr")
                 .build();
 
-        InlineKeyboardButton rur = InlineKeyboardButton
+        InlineKeyboardButton gbp = InlineKeyboardButton
                 .builder()
-                .text(this.checkout.equals("rur") ? "✅ RUR" : "RUR")
-                .callbackData("setCurrencyRUR")
+                .text(this.checkout.equals("gbp") ? "✅ GBP" : "GBP")
+                .callbackData("setCurrencyGbpUkr")
                 .build();
 
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList();
@@ -48,7 +48,7 @@ public class CurrencyUkr implements GeneralBotCommand {
         List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList();
         keyboardButtonsRow2.add(eur);
         List<InlineKeyboardButton> keyboardButtonsRow3 = new ArrayList();
-        keyboardButtonsRow3.add(rur);
+        keyboardButtonsRow3.add(gbp);
 
         List<List<InlineKeyboardButton>> settingsKeyboard = new ArrayList();
         settingsKeyboard.add(keyboardButtonsRow1);
@@ -58,6 +58,7 @@ public class CurrencyUkr implements GeneralBotCommand {
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         markup.setKeyboard(settingsKeyboard);
         message.setReplyMarkup(markup);
+        log.info(checkout);
         return message;
     }
 

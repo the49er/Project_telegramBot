@@ -1,16 +1,10 @@
-package ua.goit.telegrambot.utils;
+package ua.goit.telegrambot.api.utils;
 
 import org.jsoup.Jsoup;
 import ua.goit.telegrambot.api.CurrencyJsonUpdate;
-import ua.goit.telegrambot.api.dto.Currency;
-import ua.goit.telegrambot.api.service.NBUCurrencyService;
 
 import java.io.*;
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 public final class Utilities {
 

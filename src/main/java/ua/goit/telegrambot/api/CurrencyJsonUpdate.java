@@ -2,7 +2,7 @@ package ua.goit.telegrambot.api;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import ua.goit.telegrambot.utils.Utilities;
+import ua.goit.telegrambot.api.utils.Utilities;
 
 import java.io.File;
 import java.io.FileWriter;

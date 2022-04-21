@@ -86,7 +86,7 @@ public class NotificationsUkr implements GeneralBotCommand {
         InlineKeyboardButton cancelNotifications = InlineKeyboardButton
                 .builder()
                 .text("Відмінити нагадування")
-                .callbackData("cancelNotifications")
+                .callbackData("cancelNotificationsUkr")
                 .build();
 
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList();
