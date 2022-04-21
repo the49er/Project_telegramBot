@@ -26,7 +26,7 @@ public class GetInfoUkrCommand implements GeneralBotCommand {
         UserService service = UserService.getInstance();
         log.info("getInfoUkr");
 
-        String helloText = service.getInfo(Math.toIntExact(chatId));
+        String helloText = service.getInfoUkr(Math.toIntExact(chatId));
 
         SendMessage message = new SendMessage();
         message.setText(helloText);
