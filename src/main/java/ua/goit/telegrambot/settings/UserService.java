@@ -7,9 +7,6 @@ import ua.goit.telegrambot.api.service.MonoCurrencyService;
 import ua.goit.telegrambot.api.service.NBUCurrencyService;
 import ua.goit.telegrambot.api.service.PrivateBankCurrencyService;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.text.MessageFormat;
 import java.util.List;
 
@@ -39,83 +36,84 @@ public class UserService {
         }
     }
 
-    public void createUser(int userId) {
+    public void createUser(long userId) {
         userStorage.add(new User(userId));
     }
 
-    public void setBank(int userId, String bank) {
+    public void setBank(long userId, String bank) {
         userStorage.get(userId).setBank(bank);
     }
 
-    public String getBank(int userId) {
+    public String getBank(long userId) {
         return userStorage.get(userId).getBank();
     }
 
-    public void setRounding(int userId, int rounding) {
+    public void setRounding(long userId, int rounding) {
         userStorage.get(userId).setRounding(rounding);
     }
 
-    public void setUsd(int userId, boolean usd) {
+    public void setUsd(long userId, boolean usd) {
         userStorage.get(userId).setUsd(usd);
     }
 
-    public void setEur(int userId, boolean eur) {
+    public void setEur(long userId, boolean eur) {
         userStorage.get(userId).setEur(eur);
     }
 
-    public void setGbp(int userId, boolean gbp) {
+    public void setGbp(long userId, boolean gbp) {
         userStorage.get(userId).setGbp(gbp);
     }
 
-    public int getRounding(int userId) {
+    public int getRounding(long userId) {
         return userStorage.get(userId).getRounding();
     }
 
-    public boolean getUsd(int userId) {
+    public boolean getUsd(long userId) {
         return userStorage.get(userId).isUsd();
     }
 
-    public boolean getEur(int userId) {
+    public boolean getEur(long userId) {
         return userStorage.get(userId).isEur();
     }
 
-    public boolean getGbp(int userId) {
+    public boolean getGbp(long userId) {
         return userStorage.get(userId).isGbp();
     }
 
-    public boolean getScheduler(int userId) {
+    public boolean getScheduler(long userId) {
         return userStorage.get(userId).isScheduler();
     }
 
-    public int getSchedulerTime(int userId) {
+    public int getSchedulerTime(long userId) {
         return userStorage.get(userId).getSchedulerTime();
     }
 
-    public void setScheduler(int userId, boolean scheduler) {
+    public void setScheduler(long userId, boolean scheduler) {
         userStorage.get(userId).setScheduler(scheduler);
     }
 
-    public void setSchedulerTime(int userId, int time) {
+    public void setSchedulerTime(long userId, int time) {
         userStorage.get(userId).setSchedulerTime(time);
     }
 
-    public boolean getEnglish(int userId) {
+    public boolean getEnglish(long userId) {
         return userStorage.get(userId).isEnglish();
     }
 
-    public boolean getUkrainian(int userId) {
+    public boolean getUkrainian(long userId) {
         return userStorage.get(userId).isUkrainian();
     }
 
-    public void setEnglish(int userId, boolean english){
+    public void setEnglish(long userId, boolean english) {
         userStorage.get(userId).setEnglish(english);
     }
-    public void setUkrainian(int userId, boolean english){
+
+    public void setUkrainian(long userId, boolean english) {
         userStorage.get(userId).setUkrainian(english);
     }
 
 
-    public String getCurrency(int userId) {
+    public String getCurrency(long userId) {
         if (getUsd(userId)) {
             return "usd";
         } else if (getEur(userId)) {
@@ -125,15 +123,12 @@ public class UserService {
         }
     }
 
-    public List<Integer> getUsersWithNotficationOnCurrentHour(int time) {
+    public List<Long> getUsersWithNotificationOnCurrentHour(int time) {
         return userStorage.getUsersWithNotficationOnCurrentHour(time);
     }
 
 
-
-
-
-    public String getInfo(int userId) {
+    public String getInfo(long userId) {
         String bank = getBank(userId);
         boolean usd = getUsd(userId);
         boolean eur = getEur(userId);
@@ -147,23 +142,23 @@ public class UserService {
 
             if (getUsd(userId)) {
                 double purchaseRate1 = nbuCurrencyService.getRate(Currency.USD).get("rateUSD");
-                double purchaseRate = Precision.round(purchaseRate1,rounding);
+                double purchaseRate = Precision.round(purchaseRate1, rounding);
                 result = MessageFormat
-                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPairUsd, String.format("%."+rounding+"f",purchaseRate));
+                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPairUsd, String.format("%." + rounding + "f", purchaseRate));
 
             }
             if (getEur(userId)) {
                 double purchaseRate1 = nbuCurrencyService.getRate(Currency.EUR).get("rateEUR");
-                double purchaseRate = Precision.round(purchaseRate1,rounding);
+                double purchaseRate = Precision.round(purchaseRate1, rounding);
                 result = MessageFormat
-                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPairEur, String.format("%."+rounding+"f",purchaseRate));
+                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPairEur, String.format("%." + rounding + "f", purchaseRate));
 
             }
             if (getGbp(userId)) {
                 double purchaseRate1 = nbuCurrencyService.getRate(Currency.GBP).get("rateGBP");
-                double purchaseRate = Precision.round(purchaseRate1,rounding);
+                double purchaseRate = Precision.round(purchaseRate1, rounding);
                 result = MessageFormat
-                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPairGbp, String.format("%."+rounding+"f",purchaseRate));
+                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPairGbp, String.format("%." + rounding + "f", purchaseRate));
 
             }
         }
@@ -174,10 +169,10 @@ public class UserService {
                 double saleRate = monoCurrencyService.getRate(Currency.USD).get("SellUSD");
                 if (saleRate == 0) {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Monobank", currencyPairUsd, String.format("%."+rounding+"f",purchaseRate));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Monobank", currencyPairUsd, String.format("%." + rounding + "f", purchaseRate));
                 } else {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Monobank", currencyPairUsd, String.format("%."+rounding+"f",purchaseRate), String.format("%."+rounding+"f",saleRate));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Monobank", currencyPairUsd, String.format("%." + rounding + "f", purchaseRate), String.format("%." + rounding + "f", saleRate));
                 }
             }
             if (getEur(userId)) {
@@ -186,17 +181,17 @@ public class UserService {
 
                 if (saleRate == 0) {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Monobank", currencyPairEur, String.format("%."+rounding+"f",purchaseRate));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Monobank", currencyPairEur, String.format("%." + rounding + "f", purchaseRate));
                 } else {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Monobank", currencyPairEur, String.format("%."+rounding+"f",purchaseRate), String.format("%."+rounding+"f",saleRate));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Monobank", currencyPairEur, String.format("%." + rounding + "f", purchaseRate), String.format("%." + rounding + "f", saleRate));
                 }
             }
             if (getGbp(userId)) {
                 double purchaseRate1 = monoCurrencyService.getRate(Currency.GBP).get("crossGBP");
-                double purchaseRate = Precision.round(purchaseRate1,rounding);
+                double purchaseRate = Precision.round(purchaseRate1, rounding);
                 result = MessageFormat
-                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Monobank",currencyPairGbp, String.format("%."+rounding+"f",purchaseRate));
+                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Monobank", currencyPairGbp, String.format("%." + rounding + "f", purchaseRate));
 
             }
         }
@@ -207,10 +202,10 @@ public class UserService {
                 double saleRate = privateBankCurrencyService.getRate(Currency.USD).get("sellUSD");
                 if (saleRate == 0) {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Private", currencyPairUsd, String.format("%."+rounding+"f",purchaseRate));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Private", currencyPairUsd, String.format("%." + rounding + "f", purchaseRate));
                 } else {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Private", currencyPairUsd, String.format("%."+rounding+"f",purchaseRate), String.format("%."+rounding+"f",saleRate));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Private", currencyPairUsd, String.format("%." + rounding + "f", purchaseRate), String.format("%." + rounding + "f", saleRate));
                 }
             }
             if (getEur(userId)) {
@@ -218,10 +213,10 @@ public class UserService {
                 double saleRate = privateBankCurrencyService.getRate(Currency.EUR).get("buyEUR");
                 if (saleRate == 0) {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Privat", currencyPairEur, String.format("%."+rounding+"f",saleRate));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Privat", currencyPairEur, String.format("%." + rounding + "f", saleRate));
                 } else {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Privat", currencyPairEur, String.format("%."+rounding+"f",saleRate), String.format("%."+rounding+"f",purchaseRate));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Privat", currencyPairEur, String.format("%." + rounding + "f", saleRate), String.format("%." + rounding + "f", purchaseRate));
                 }
             }
             if (getGbp(userId)) {
@@ -234,7 +229,7 @@ public class UserService {
         return result;
     }
 
-    public String getInfoUkr(int userId) {
+    public String getInfoUkr(long userId) {
         String bank = getBank(userId);
         boolean usd = getUsd(userId);
         boolean eur = getEur(userId);
@@ -248,23 +243,23 @@ public class UserService {
 
             if (getUsd(userId)) {
                 double purchaseRate1 = nbuCurrencyService.getRate(Currency.USD).get("rateUSD");
-                double purchaseRate = Precision.round(purchaseRate1,rounding);
+                double purchaseRate = Precision.round(purchaseRate1, rounding);
                 result = MessageFormat
-                        .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "НБУ", currencyPairUsd, String.format("%."+rounding+"f",purchaseRate));
+                        .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "НБУ", currencyPairUsd, String.format("%." + rounding + "f", purchaseRate));
 
             }
             if (getEur(userId)) {
                 double purchaseRate1 = nbuCurrencyService.getRate(Currency.EUR).get("rateEUR");
-                double purchaseRate = Precision.round(purchaseRate1,rounding);
+                double purchaseRate = Precision.round(purchaseRate1, rounding);
                 result = MessageFormat
-                        .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "НБУ", currencyPairEur, String.format("%."+rounding+"f",purchaseRate));
+                        .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "НБУ", currencyPairEur, String.format("%." + rounding + "f", purchaseRate));
 
             }
             if (getGbp(userId)) {
                 double purchaseRate1 = nbuCurrencyService.getRate(Currency.GBP).get("rateGBP");
-                double purchaseRate = Precision.round(purchaseRate1,rounding);
+                double purchaseRate = Precision.round(purchaseRate1, rounding);
                 result = MessageFormat
-                        .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "НБУ", currencyPairGbp, String.format("%."+rounding+"f",purchaseRate));
+                        .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "НБУ", currencyPairGbp, String.format("%." + rounding + "f", purchaseRate));
 
             }
         }
@@ -275,10 +270,10 @@ public class UserService {
                 double saleRate = monoCurrencyService.getRate(Currency.USD).get("SellUSD");
                 if (saleRate == 0) {
                     result = MessageFormat
-                            .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "МоноБанк", currencyPairUsd, String.format("%."+rounding+"f",purchaseRate));
+                            .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "МоноБанк", currencyPairUsd, String.format("%." + rounding + "f", purchaseRate));
                 } else {
                     result = MessageFormat
-                            .format("{0} курс валют: {1}\n купівля: {2}\n продаж: {3}", "МоноБанк", currencyPairUsd, String.format("%."+rounding+"f",purchaseRate), String.format("%."+rounding+"f",saleRate));
+                            .format("{0} курс валют: {1}\n купівля: {2}\n продаж: {3}", "МоноБанк", currencyPairUsd, String.format("%." + rounding + "f", purchaseRate), String.format("%." + rounding + "f", saleRate));
                 }
             }
             if (getEur(userId)) {
@@ -287,17 +282,17 @@ public class UserService {
 
                 if (saleRate == 0) {
                     result = MessageFormat
-                            .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "МоноБанк", currencyPairEur, String.format("%."+rounding+"f",purchaseRate));
+                            .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "МоноБанк", currencyPairEur, String.format("%." + rounding + "f", purchaseRate));
                 } else {
                     result = MessageFormat
-                            .format("{0} курс валют: {1}\n купівля: {2}\n продаж: {3}", "МоноБанк", currencyPairEur, String.format("%."+rounding+"f",purchaseRate), String.format("%."+rounding+"f",saleRate));
+                            .format("{0} курс валют: {1}\n купівля: {2}\n продаж: {3}", "МоноБанк", currencyPairEur, String.format("%." + rounding + "f", purchaseRate), String.format("%." + rounding + "f", saleRate));
                 }
             }
             if (getGbp(userId)) {
                 double purchaseRate1 = monoCurrencyService.getRate(Currency.GBP).get("crossGBP");
-                double purchaseRate = Precision.round(purchaseRate1,rounding);
+                double purchaseRate = Precision.round(purchaseRate1, rounding);
                 result = MessageFormat
-                        .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "МоноБанк",currencyPairGbp, String.format("%."+rounding+"f",purchaseRate));
+                        .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "МоноБанк", currencyPairGbp, String.format("%." + rounding + "f", purchaseRate));
 
             }
         }
@@ -308,10 +303,10 @@ public class UserService {
                 double saleRate = privateBankCurrencyService.getRate(Currency.USD).get("sellUSD");
                 if (saleRate == 0) {
                     result = MessageFormat
-                            .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "ПриватБанк", currencyPairUsd, String.format("%."+rounding+"f",purchaseRate));
+                            .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "ПриватБанк", currencyPairUsd, String.format("%." + rounding + "f", purchaseRate));
                 } else {
                     result = MessageFormat
-                            .format("{0} курс валют: {1}\n купівля: {2}\n продаж: {3}", "ПриватБанк", currencyPairUsd, String.format("%."+rounding+"f",purchaseRate), String.format("%."+rounding+"f",saleRate));
+                            .format("{0} курс валют: {1}\n купівля: {2}\n продаж: {3}", "ПриватБанк", currencyPairUsd, String.format("%." + rounding + "f", purchaseRate), String.format("%." + rounding + "f", saleRate));
                 }
             }
             if (getEur(userId)) {
@@ -319,10 +314,10 @@ public class UserService {
                 double saleRate = privateBankCurrencyService.getRate(Currency.EUR).get("buyEUR");
                 if (saleRate == 0) {
                     result = MessageFormat
-                            .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "ПриватБанк", currencyPairEur, String.format("%."+rounding+"f",saleRate));
+                            .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "ПриватБанк", currencyPairEur, String.format("%." + rounding + "f", saleRate));
                 } else {
                     result = MessageFormat
-                            .format("{0} курс валют: {1}\n купівля: {2}\n продаж: {3}", "ПриватБанк", currencyPairEur, String.format("%."+rounding+"f",saleRate), String.format("%."+rounding+"f",purchaseRate));
+                            .format("{0} курс валют: {1}\n купівля: {2}\n продаж: {3}", "ПриватБанк", currencyPairEur, String.format("%." + rounding + "f", saleRate), String.format("%." + rounding + "f", purchaseRate));
                 }
             }
             if (getGbp(userId)) {

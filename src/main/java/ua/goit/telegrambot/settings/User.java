@@ -5,7 +5,7 @@ import lombok.Data;
 //TODO telegram bot API has own User class -> please rename this entity to BotUser or smth
 @Data
 public class User {
-    private final int id;
+    private final long id;
     private String bank; //TODO we have to make it ENUM or CONSTANT
     private boolean usd;
     private boolean eur;
@@ -25,7 +25,7 @@ public class User {
         this.schedulerTime = schedulerTime;
     }
 
-    public User(int id) {
+    public User(long id) {
         this.id = id;
         bank = "nbu";
         usd = true;

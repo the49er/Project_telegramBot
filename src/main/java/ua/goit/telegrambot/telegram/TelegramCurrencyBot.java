@@ -70,12 +70,12 @@ public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
     public void sendNotification(Long chatId) {
         SendMessage answer = new SendMessage();
 
-        if (service.getEnglish(Math.toIntExact(chatId))) {
-            answer.setText(service.getInfo(Math.toIntExact(chatId)));
+        if (service.getEnglish(chatId)) {
+            answer.setText(service.getInfo(chatId));
             answer.setChatId(chatId.toString());
             log.info("ChatId# :" + chatId + " | Sent ENG notifications message");
         }else {
-            answer.setText(service.getInfoUkr(Math.toIntExact(chatId)));
+            answer.setText(service.getInfoUkr(chatId));
             answer.setChatId(chatId.toString());
             log.info("ChatId# :" + chatId + " | Sent UKR notifications message");
         }

@@ -5,14 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-import ua.goit.telegrambot.api.dto.Currency;
-import ua.goit.telegrambot.api.service.MonoCurrencyService;
 import ua.goit.telegrambot.settings.UserService;
 import ua.goit.telegrambot.telegram.nonCommand.GeneralBotCommand;
-
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +20,7 @@ public class GetInfoUkrCommand implements GeneralBotCommand {
         UserService service = UserService.getInstance();
         log.info("getInfoUkr");
 
-        String helloText = service.getInfoUkr(Math.toIntExact(chatId));
+        String helloText = service.getInfoUkr(chatId);
 
         SendMessage message = new SendMessage();
         message.setText(helloText);

@@ -28,7 +28,7 @@ public class StartBotCommand extends BotCommand {
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         log.info("/start");
         String helloText = "Please select your language.\nБудь ласка, оберіть мову.";
-        service.createUser(Math.toIntExact(chat.getId()));
+        service.createUser(chat.getId());
 
         SendMessage message = new SendMessage();
         message.setText(helloText);

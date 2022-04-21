@@ -38,8 +38,8 @@ public class NonCommand {
         switch(data) {
             case "english":
                 answer = new StartEngCommand(chatId, userName).getMessage();
-                service.setEnglish(Math.toIntExact(chatId), true);
-                service.setUkrainian(Math.toIntExact(chatId), false);
+                service.setEnglish(chatId, true);
+                service.setUkrainian(chatId, false);
                 break;
             case "getInfo":
                 answer = new GetInfoCommand(chatId, userName).getMessage();
@@ -48,20 +48,20 @@ public class NonCommand {
                 answer = new SettingsCommand(chatId, userName).getMessage();
                 break;
             case "rounding":
-                answer = new Rounding(service.getRounding(Math.toIntExact(chatId)),chatId, userName).getMessage();
+                answer = new Rounding(service.getRounding(chatId), chatId, userName).getMessage();
                 break;
             case "bank":
-                answer = new Bank(service.getBank(Math.toIntExact(chatId)), chatId, userName).getMessage();
+                answer = new Bank(service.getBank(chatId), chatId, userName).getMessage();
                 break;
             case "currency":
-                answer = new Currency(service.getCurrency(Math.toIntExact(chatId)), chatId, userName).getMessage();
+                answer = new Currency(service.getCurrency(chatId), chatId, userName).getMessage();
                 break;
             case "notifications":
-                answer = new Notifications(String.valueOf(service.getSchedulerTime(Math.toIntExact(chatId))), chatId, userName).getMessage();
+                answer = new Notifications(String.valueOf(chatId), chatId, userName).getMessage();
                 break;
             case "ukrainian":
-                service.setEnglish(Math.toIntExact(chatId), false);
-                service.setUkrainian(Math.toIntExact(chatId), true);
+                service.setEnglish(chatId, false);
+                service.setUkrainian(chatId, true);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "getInfoUkr":
@@ -71,218 +71,218 @@ public class NonCommand {
                 answer = new SettingsUkrCommand(chatId, userName).getMessage();
                 break;
             case "roundingUkr":
-                answer = new RoundingUkr(service.getRounding(Math.toIntExact(chatId)), chatId, userName).getMessage();
+                answer = new RoundingUkr(service.getRounding(chatId), chatId, userName).getMessage();
                 break;
             case "bankUkr":
-                answer = new BankUkr(service.getBank(Math.toIntExact(chatId)), chatId, userName).getMessage();
+                answer = new BankUkr(service.getBank(chatId), chatId, userName).getMessage();
                 break;
             case "currencyUkr":
-                answer = new CurrencyUkr(service.getCurrency(Math.toIntExact(chatId)), chatId, userName).getMessage();
+                answer = new CurrencyUkr(service.getCurrency(chatId), chatId, userName).getMessage();
                 break;
             case "notificationsUkr":
-                answer = new NotificationsUkr(String.valueOf(service.getSchedulerTime(Math.toIntExact(chatId))), chatId, userName).getMessage();;
+                answer = new NotificationsUkr(String.valueOf(service.getSchedulerTime(chatId)), chatId, userName).getMessage();;
                 break;
             //Bank setup for user Eng
             case "setBankMonoBank":
-                service.setBank(Math.toIntExact(chatId),"monobank");
+                service.setBank(chatId,"monobank");
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "setBankNBU":
-                service.setBank(Math.toIntExact(chatId),"nbu");
+                service.setBank(chatId,"nbu");
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "setBankPrivat":
-                service.setBank(Math.toIntExact(chatId),"privat");
+                service.setBank(chatId,"privat");
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             //Bank setup for user Ukr
             case "setBankMonoBankUkr":
-                service.setBank(Math.toIntExact(chatId),"monobank");
+                service.setBank(chatId,"monobank");
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "setBankNbuUkr":
-                service.setBank(Math.toIntExact(chatId),"nbu");
+                service.setBank(chatId,"nbu");
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "setBankPrivatUkr":
-                service.setBank(Math.toIntExact(chatId),"privat");
+                service.setBank(chatId,"privat");
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             //Rounding setup for user Eng
             case "setRoundingTwo":
-                service.setRounding(Math.toIntExact(chatId),2);
+                service.setRounding(chatId,2);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "setRoundingThree":
-                service.setRounding(Math.toIntExact(chatId),3);
+                service.setRounding(chatId,3);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "setRoundingFour":
-                service.setRounding(Math.toIntExact(chatId),4);
+                service.setRounding(chatId,4);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             //Rounding setup for user Ukr
             case "setRoundingTwoUkr":
-                service.setRounding(Math.toIntExact(chatId),2);
+                service.setRounding(chatId,2);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "setRoundingThreeUkr":
-                service.setRounding(Math.toIntExact(chatId),3);
+                service.setRounding(chatId,3);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "setRoundingFourUkr":
-                service.setRounding(Math.toIntExact(chatId),4);
+                service.setRounding(chatId,4);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             //Currency setup for user Eng
             case "setCurrencyUSD":
-                service.setUsd(Math.toIntExact(chatId),true);
-                service.setEur(Math.toIntExact(chatId),false);
-                service.setGbp(Math.toIntExact(chatId),false);
+                service.setUsd(chatId,true);
+                service.setEur(chatId,false);
+                service.setGbp(chatId,false);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "setCurrencyEUR":
-                service.setUsd(Math.toIntExact(chatId),false);
-                service.setEur(Math.toIntExact(chatId),true);
-                service.setGbp(Math.toIntExact(chatId),false);
+                service.setUsd(chatId,false);
+                service.setEur(chatId,true);
+                service.setGbp(chatId,false);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "setCurrencyGbp":
-                service.setUsd(Math.toIntExact(chatId),false);
-                service.setEur(Math.toIntExact(chatId),false);
-                service.setGbp(Math.toIntExact(chatId),true);
+                service.setUsd(chatId,false);
+                service.setEur(chatId,false);
+                service.setGbp(chatId,true);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             //Currency setup for user Ukr
             case "setCurrencyUsdUkr":
-                service.setUsd(Math.toIntExact(chatId),true);
-                service.setEur(Math.toIntExact(chatId),false);
-                service.setGbp(Math.toIntExact(chatId),false);
+                service.setUsd(chatId,true);
+                service.setEur(chatId,false);
+                service.setGbp(chatId,false);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "setCurrencyEurUkr":
-                service.setUsd(Math.toIntExact(chatId),false);
-                service.setEur(Math.toIntExact(chatId),true);
-                service.setGbp(Math.toIntExact(chatId),false);
+                service.setUsd(chatId,false);
+                service.setEur(chatId,true);
+                service.setGbp(chatId,false);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "setCurrencyGbpUkr":
-                service.setUsd(Math.toIntExact(chatId),false);
-                service.setEur(Math.toIntExact(chatId),false);
-                service.setGbp(Math.toIntExact(chatId),true);
+                service.setUsd(chatId,false);
+                service.setEur(chatId,false);
+                service.setGbp(chatId,true);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             //Notifications setup for user ENG
             case "9":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),9);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,9);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "10":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),10);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,10);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "11":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),11);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,11);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "12":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),12);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,12);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "13":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),13);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,13);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "14":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),14);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,14);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "15":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),15);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,15);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "16":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),16);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,16);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "17":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),17);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,17);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "18":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),18);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,18);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             case "cancelNotifications":
-                service.setScheduler(Math.toIntExact(chatId),false);
-                service.setSchedulerTime(Math.toIntExact(chatId),-1);
+                service.setScheduler(chatId,false);
+                service.setSchedulerTime(chatId,-1);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
             //Notifications setup for user ENG
             case "setNine":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),9);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,9);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "setTen":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),10);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,10);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "setEleven":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),11);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,11);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "setTwelve":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),12);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,12);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "setThirteen":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),13);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,13);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "setFourteen":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),14);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,14);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "setFifteen":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),15);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,15);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
 
                 break;
             case "setSixteen":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),16);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,16);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "setSeventeen":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),17);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,17);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "setEighteen":
-                service.setScheduler(Math.toIntExact(chatId),true);
-                service.setSchedulerTime(Math.toIntExact(chatId),18);
+                service.setScheduler(chatId,true);
+                service.setSchedulerTime(chatId,18);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
             case "cancelNotificationsUkr":
-                service.setScheduler(Math.toIntExact(chatId),false);
-                service.setSchedulerTime(Math.toIntExact(chatId),-1);
+                service.setScheduler(chatId,false);
+                service.setSchedulerTime(chatId,-1);
                 answer = new StartUkrCommand(chatId, userName).getMessage();
 
         }

@@ -3,7 +3,6 @@ package ua.goit.telegrambot.settings;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.units.qual.C;
 import ua.goit.telegrambot.telegram.TelegramCurrencyBot;
 
 import java.util.Calendar;
@@ -44,10 +43,10 @@ public class Scheduler implements Runnable {
             log.info("Notifications Thread has started");
             calendar = new GregorianCalendar();
             hour = calendar.get(Calendar.HOUR_OF_DAY);
-            List<Integer> userIds = service.getUsersWithNotficationOnCurrentHour(hour);
+            List<Long> userIds = service.getUsersWithNotificationOnCurrentHour(hour);
 
-            for (Integer userId : userIds) {
-                bot.sendNotification(Long.valueOf(userId));
+            for (long userId : userIds) {
+                bot.sendNotification(userId);
                 log.info("Notification has been sent");
             }
             if (hour >= 18){

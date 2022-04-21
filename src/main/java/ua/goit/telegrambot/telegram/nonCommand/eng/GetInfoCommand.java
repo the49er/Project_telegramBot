@@ -11,8 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-import ua.goit.telegrambot.api.dto.Currency;
-import ua.goit.telegrambot.api.service.MonoCurrencyService;
 import ua.goit.telegrambot.settings.UserService;
 import ua.goit.telegrambot.telegram.nonCommand.GeneralBotCommand;
 
@@ -28,7 +26,7 @@ public class GetInfoCommand implements GeneralBotCommand {
 
         log.info("receive getInfo response");
 
-        String helloText = service.getInfo(Math.toIntExact(chatId));
+        String helloText = service.getInfo(chatId);
         SendMessage message = new SendMessage();
         message.setText(helloText);
         message.setChatId(Long.toString(this.chatId));
