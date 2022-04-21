@@ -96,7 +96,7 @@ public class NonCommand {
                 service.setBank(Math.toIntExact(chatId),"monobank");
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
-            case "etBankNbuUkr":
+            case "setBankNbuUkr":
                 service.setBank(Math.toIntExact(chatId),"nbu");
                 answer = new StartUkrCommand(chatId, userName).getMessage();
                 break;
@@ -117,7 +117,7 @@ public class NonCommand {
                 service.setRounding(Math.toIntExact(chatId),4);
                 answer = new StartEngCommand(chatId, userName).getMessage();
                 break;
-            //Rounding setup for user Eng
+            //Rounding setup for user Ukr
             case "setRoundingTwoUkr":
                 service.setRounding(Math.toIntExact(chatId),2);
                 answer = new StartUkrCommand(chatId, userName).getMessage();

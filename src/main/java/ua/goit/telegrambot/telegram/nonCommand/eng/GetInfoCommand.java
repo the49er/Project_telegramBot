@@ -27,8 +27,6 @@ public class GetInfoCommand implements GeneralBotCommand {
         UserService service = UserService.getInstance();
 
         log.info("receive getInfo response");
-        String bankName = "NBU";
-        String currencyPair = "UAH/USD";
 
         String helloText = service.getInfo(Math.toIntExact(chatId));
         SendMessage message = new SendMessage();
