@@ -52,7 +52,6 @@ public class NonCommand {
                 answer = new Bank(service.getBank(Math.toIntExact(chatId)), chatId, userName).getMessage();
                 break;
             case "currency":
-//                answer = new Currency("usd"/*TODO user.getCurreny()*/, chatId, userName).getMessage();
                 answer = new Currency(service.getCurrency(Math.toIntExact(chatId)), chatId, userName).getMessage();
                 break;
             case "notifications":

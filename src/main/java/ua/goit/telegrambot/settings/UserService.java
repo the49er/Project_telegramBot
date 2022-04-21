@@ -121,13 +121,13 @@ public class UserService {
         return userStorage.getUsersWithNotficationOnCurrentHour(time);
     }
 
-//    public boolean getIsEnglish(int userId){
-//        return userStorage.get(userId).getIsEnglish();
-//    }
-//
-//    public void setIsEnglish(int userId, boolean english){
-//        userStorage.get(userId).setIsEnglish(english);
-//    }
+
+    public void setEnglish(int userId, boolean english){
+        userStorage.get(userId).setEnglish(english);
+    }
+    public void setUkrainian(int userId, boolean english){
+        userStorage.get(userId).setUkrainian(english);
+    }
 
 
     public String getInfo(int userId) {

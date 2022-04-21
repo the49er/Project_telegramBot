@@ -28,22 +28,6 @@ public class GetInfoCommand implements GeneralBotCommand {
         UserService service = UserService.getInstance();
 
         log.info("receive getInfo response");
-        String bankName = "NBU";
-        String currencyPair = "UAH/USD";
-
-
-//        BigDecimal purchaseRate = new MonoCurrencyService().getRate(Currency.USD).get("buyUSD");
-//
-//        BigDecimal saleRate =  new MonoCurrencyService().getRate(Currency.USD).get("sellUSD");
-
-//        String helloText = "";
-//        if (saleRate == null){
-//            helloText = MessageFormat
-//                    .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", bankName, currencyPair, purchaseRate);
-//        } else {
-//            helloText = MessageFormat
-//                    .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", bankName, currencyPair, purchaseRate, saleRate);
-//        }
 
         String helloText = service.getInfo(Math.toIntExact(chatId));
         SendMessage message = new SendMessage();
