@@ -218,7 +218,7 @@ public class UserService {
                             .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "Privat", currencyPairEur, String.format("%."+rounding+"f",saleRate));
                 } else {
                     result = MessageFormat
-                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Privat", currencyPairEur, saleRate, String.format("%."+rounding+"f",purchaseRate));
+                            .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: {3}", "Privat", currencyPairEur, String.format("%."+rounding+"f",saleRate), String.format("%."+rounding+"f",purchaseRate));
                 }
             }
             if (getGbp(userId)) {
