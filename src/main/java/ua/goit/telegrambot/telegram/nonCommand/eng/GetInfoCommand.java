@@ -1,8 +1,5 @@
 package ua.goit.telegrambot.telegram.nonCommand.eng;
 
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 

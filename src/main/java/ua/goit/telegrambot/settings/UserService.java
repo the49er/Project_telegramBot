@@ -321,8 +321,10 @@ public class UserService {
                 }
             }
             if (getGbp(userId)) {
+                double purchaseRate1 = nbuCurrencyService.getRate(Currency.GBP).get("rateGBP");
+                double purchaseRate = Precision.round(purchaseRate1, rounding);
                 result = MessageFormat
-                        .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "ПриватБанк", currencyPairGbp);
+                        .format("{0} курс валют: {1}\n купівля: {2}\n продаж: ⏳ ", "ПриватБанк", currencyPairGbp, String.format("%." + rounding + "f", purchaseRate));
 
             }
         }
