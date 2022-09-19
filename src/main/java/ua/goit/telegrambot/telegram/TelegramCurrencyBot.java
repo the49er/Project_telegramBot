@@ -15,7 +15,7 @@ import ua.goit.telegrambot.telegram.command.StartBotCommand;
 public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
     UserService service = UserService.getInstance();
 
-    public TelegramCurrencyBot() {
+    public TelegramCurrencyBot() {//ctrl + alt + l
         register(new StartBotCommand());
 
     }
@@ -42,7 +42,7 @@ public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
             log.info("chatId #: " + Long.toString(chatIdForCallBackQuery) + "| rcvd callBackQuery: " + callbackQuery + " | from: " + userName);
             answer = new NonCommand(callbackQuery, chatIdForCallBackQuery, userName).getAnswer();
 
-        }else if (update.hasMessage()){
+        } else if (update.hasMessage()) {
 
             Message msgText = update.getMessage();
             Long chatIdForTextMsg = msgText.getChatId();
@@ -51,7 +51,7 @@ public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
             log.info("chatId #: " + Long.toString(chatIdForTextMsg) + " | rcvd callBackQuery: " + msgText + " | from: " + userName);
             answer.setChatId(Long.toString(chatIdForTextMsg));
             answer.setText(strMsg);
-        }else {
+        } else {
             log.info("wrong request");
             update.getMessage().getChatId();
             String wrongRequest = "Please write '/start'";
@@ -74,7 +74,7 @@ public class TelegramCurrencyBot extends TelegramLongPollingCommandBot {
             answer.setText(service.getInfo(chatId));
             answer.setChatId(chatId.toString());
             log.info("ChatId# :" + chatId + " | Sent ENG notifications message");
-        }else {
+        } else {
             answer.setText(service.getInfoUkr(chatId));
             answer.setChatId(chatId.toString());
             log.info("ChatId# :" + chatId + " | Sent UKR notifications message");

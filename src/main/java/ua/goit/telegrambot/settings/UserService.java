@@ -3,23 +3,25 @@ package ua.goit.telegrambot.settings;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.util.Precision;
 import ua.goit.telegrambot.api.dto.Currency;
+import ua.goit.telegrambot.api.service.CurrencyService;
 import ua.goit.telegrambot.api.service.MonoCurrencyService;
 import ua.goit.telegrambot.api.service.NBUCurrencyService;
 import ua.goit.telegrambot.api.service.PrivateBankCurrencyService;
 
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 
 @Slf4j
 public class UserService {
     private static volatile UserService instance;
-    private StorageOfUsers userStorage;
+    private StorageOfUsers userStorage;//final
 
-    NBUCurrencyService nbuCurrencyService = new NBUCurrencyService();
+    NBUCurrencyService nbuCurrencyService = new NBUCurrencyService();//why classes do not have static reference methods
     PrivateBankCurrencyService privateBankCurrencyService = new PrivateBankCurrencyService();
     MonoCurrencyService monoCurrencyService = new MonoCurrencyService();
 
-    public UserService() {
+    private UserService() {
         userStorage = StorageOfUsers.getInstance();
     }
 
@@ -28,7 +30,7 @@ public class UserService {
         if (result != null) {
             return result;
         }
-        synchronized (StorageOfUsers.class) {
+        synchronized (UserService.class) {
             if (instance == null) {
                 instance = new UserService();
             }
@@ -128,11 +130,8 @@ public class UserService {
     }
 
 
-    public String getInfo(long userId) {
+    public String getInfo(long userId) {//lots of repetative code
         String bank = getBank(userId);
-        boolean usd = getUsd(userId);
-        boolean eur = getEur(userId);
-        boolean gbp = getGbp(userId);
         int rounding = getRounding(userId);
         String result = "";
         String currencyPairUsd = "UAH/USD";
@@ -140,27 +139,10 @@ public class UserService {
         String currencyPairGbp = "UAH/GBP";
         if (bank.equals("nbu")) {
 
-            if (getUsd(userId)) {
-                double purchaseRate1 = nbuCurrencyService.getRate(Currency.USD).get("rateUSD");
-                double purchaseRate = Precision.round(purchaseRate1, rounding);
-                result = MessageFormat
-                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPairUsd, String.format("%." + rounding + "f", purchaseRate));
+            if (getUsd(userId)) result = checkForCurrencyAndPring(nbuCurrencyService, rounding, currencyPairUsd);
+            if (getEur(userId)) result = checkForCurrencyAndPring(nbuCurrencyService, rounding, currencyPairEur);
+            if (getGbp(userId)) result = checkForCurrencyAndPring(nbuCurrencyService, rounding, currencyPairGbp);
 
-            }
-            if (getEur(userId)) {
-                double purchaseRate1 = nbuCurrencyService.getRate(Currency.EUR).get("rateEUR");
-                double purchaseRate = Precision.round(purchaseRate1, rounding);
-                result = MessageFormat
-                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPairEur, String.format("%." + rounding + "f", purchaseRate));
-
-            }
-            if (getGbp(userId)) {
-                double purchaseRate1 = nbuCurrencyService.getRate(Currency.GBP).get("rateGBP");
-                double purchaseRate = Precision.round(purchaseRate1, rounding);
-                result = MessageFormat
-                        .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPairGbp, String.format("%." + rounding + "f", purchaseRate));
-
-            }
         }
 
         if (bank.equals("monobank")) {
@@ -227,6 +209,13 @@ public class UserService {
         }
         log.info(result);
         return result;
+    }
+
+    private static String checkForCurrencyAndPring(CurrencyService currencyService, int rounding, String currencyPair) {
+        double purchaseRate1 = currencyService.getRate(Currency.USD).get("rateUSD");
+        double purchaseRate = Precision.round(purchaseRate1, rounding);
+        return MessageFormat
+                .format("{0} exchange rate: {1}\n Purchase: {2}\n Sale: ⏳ ", "NBU", currencyPair, String.format("%." + rounding + "f", purchaseRate));
     }
 
     public String getInfoUkr(long userId) {

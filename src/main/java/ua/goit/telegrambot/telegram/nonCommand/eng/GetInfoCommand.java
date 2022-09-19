@@ -24,7 +24,7 @@ public class GetInfoCommand implements GeneralBotCommand {
         log.info("receive getInfo response");
 
         String helloText = service.getInfo(chatId);
-        SendMessage message = new SendMessage();
+        SendMessage message = new SendMessage();//same code
         message.setText(helloText);
         message.setChatId(Long.toString(this.chatId));
 

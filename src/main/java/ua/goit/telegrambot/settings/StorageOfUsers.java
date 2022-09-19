@@ -6,9 +6,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class StorageOfUsers {
     private static volatile StorageOfUsers instance;
-    private ConcurrentHashMap<Long, User> userSettings;
+    private ConcurrentHashMap<Long, User> userSettings;//final
 
-    public StorageOfUsers(){
+    private StorageOfUsers() {
         userSettings = new ConcurrentHashMap<>();
     }
 
@@ -17,7 +17,7 @@ public class StorageOfUsers {
         if (result != null) {
             return result;
         }
-        synchronized(StorageOfUsers.class) {
+        synchronized (StorageOfUsers.class) {
             if (instance == null) {
                 instance = new StorageOfUsers();
             }
@@ -25,16 +25,18 @@ public class StorageOfUsers {
         }
     }
 
-    public void add(User user){
+    public void add(User user) {
         userSettings.put(user.getId(), user);
     }
 
-    public User get(long userId) { return userSettings.get(userId); }
+    public User get(long userId) {
+        return userSettings.get(userId);
+    }
 
-    public List<Long> getUsersWithNotficationOnCurrentHour(int time){
+    public List<Long> getUsersWithNotficationOnCurrentHour(int time) {
         List<Long> userIds = new ArrayList<>();
-        for (User user : userSettings.values()){
-            if (user.isScheduler() && user.getSchedulerTime() == time){
+        for (User user : userSettings.values()) {
+            if (user.isScheduler() && user.getSchedulerTime() == time) {
                 userIds.add(user.getId());
             }
         }

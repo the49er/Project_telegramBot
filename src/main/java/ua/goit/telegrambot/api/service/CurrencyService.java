@@ -6,5 +6,5 @@ import java.io.IOException;
 import java.util.Map;
 
 public interface CurrencyService {
-    Map<String, Double> getRate(Currency currency) throws IOException;
+    Map<String, Double> getRate(Currency currency);
 }

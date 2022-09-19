@@ -4,7 +4,7 @@ import lombok.Data;
 
 //TODO telegram bot API has own User class -> please rename this entity to BotUser or smth
 @Data
-public class User {
+public class User {// no TODO's in master branch
     private final long id;
     private String bank; //TODO we have to make it ENUM or CONSTANT
     private boolean usd;

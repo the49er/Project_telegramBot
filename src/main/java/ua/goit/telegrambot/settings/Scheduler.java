@@ -1,10 +1,7 @@
 package ua.goit.telegrambot.settings;
-
-
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import ua.goit.telegrambot.telegram.TelegramCurrencyBot;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -12,7 +9,6 @@ import java.util.List;
 
 @Slf4j
 public class Scheduler implements Runnable {
-
 
     @SneakyThrows
     @Override
@@ -39,7 +35,7 @@ public class Scheduler implements Runnable {
 
         UserService service = UserService.getInstance();
 
-        while (true) {
+        while (true) {//https://mkyong.com/java/how-to-run-a-task-periodically-in-java/
             log.info("Notifications Thread has started");
             calendar = new GregorianCalendar();
             hour = calendar.get(Calendar.HOUR_OF_DAY);

@@ -34,7 +34,7 @@ public class NonCommand {
     PrivateBankCurrencyService privateBankCurrencyService = new PrivateBankCurrencyService();
     MonoCurrencyService monoCurrencyService = new MonoCurrencyService();
 
-    public NonCommand(String data, Long chatId, String userName) {
+    public NonCommand(String data, Long chatId, String userName) { // divide into several methods, method should not be longer that 30 lines
         switch(data) {
             case "english":
                 answer = new StartEngCommand(chatId, userName).getMessage();

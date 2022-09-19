@@ -22,7 +22,7 @@ public class StartBotCommand extends BotCommand {
 
     }
 
-    UserService service = new UserService();
+    UserService service = UserService.getInstance();
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {

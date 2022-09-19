@@ -27,7 +27,7 @@ public class CurrencyJsonUpdate implements Runnable {
     private static boolean monoCheckErr = true;
 
     @Override
-    public void run() {
+    public void run() {//repetative code
 
         //NBU currency update
         final Runnable nbu = () ->

@@ -25,27 +25,27 @@ public final class Utilities {
         return json;
     }
 
-    //check for API error
-    public static boolean checkNbuCurrencyError() {
-        return CurrencyJsonUpdate.isNbuCheckErr();
-    }
-
-    public static boolean checkPrivatCurrencyError() {
-        return CurrencyJsonUpdate.isPrivatCheckErr();
-    }
-
-    public static boolean checkMonoCurrencyError() {
-        return CurrencyJsonUpdate.isMonoCheckErr();
-    }
-
-    //wait
-    public static void wait(int seconds) {
-        try {
-            TimeUnit.SECONDS.sleep(seconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+    //check for API error//unused code
+//    public static boolean checkNbuCurrencyError() {
+//        return CurrencyJsonUpdate.isNbuCheckErr();
+//    }
+//
+//    public static boolean checkPrivatCurrencyError() {
+//        return CurrencyJsonUpdate.isPrivatCheckErr();
+//    }
+//
+//    public static boolean checkMonoCurrencyError() {
+//        return CurrencyJsonUpdate.isMonoCheckErr();
+//    }
+//
+//    //wait
+//    public static void wait(int seconds) {
+//        try {
+//            TimeUnit.SECONDS.sleep(seconds);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     //write from json
     public static String writeFromJsonFile(String fileName) {

@@ -13,7 +13,6 @@ import ua.goit.telegrambot.telegram.nonCommand.GeneralBotCommand;
 @Slf4j
 @AllArgsConstructor
 public class Bank implements GeneralBotCommand {
-
     String checkout;
     Long chatId;
     String userName;
@@ -44,7 +43,7 @@ public class Bank implements GeneralBotCommand {
                 .callbackData("setBankPrivat")
                 .build();
 
-        List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList();
+        List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList();//raw use + same code with 4 classes
         keyboardButtonsRow1.add(monoBank);
         List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList();
         keyboardButtonsRow2.add(nBU);

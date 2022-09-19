@@ -11,12 +11,13 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class PrivateBankCurrencyService implements CurrencyService {
 
     @Override
-    public Map<String, Double> getRate(Currency currency) {
+    public Map<String, Double> getRate(Currency currency) {//repetative code
 
         //take json from file
         String takeJsonFromFile = Utilities.writeFromJsonFile(CurrencyJsonUpdate.getABSOLUTE_PATH_PRIVAT());
@@ -28,21 +29,22 @@ public class PrivateBankCurrencyService implements CurrencyService {
         List<CurrencyItemPrivat> currencyItemPrivats = new Gson().fromJson(takeJsonFromFile, typeToken);
 
         //Find currency
-        double privatBuy = currencyItemPrivats.stream()
-                .filter(it -> it.getCcy() == currency)
-                .map(CurrencyItemPrivat::getBuy)
-                .collect(Collectors.toList()).get(0);
-
-        double privatSele = currencyItemPrivats.stream()
-                .filter(it -> it.getCcy() == currency)
-                .map(CurrencyItemPrivat::getSale)
-                .collect(Collectors.toList()).get(0);
+        double privatBuy = getCurrency(CurrencyItemPrivat::getBuy, currencyItemPrivats, currency);
+        double privatSell = getCurrency(CurrencyItemPrivat::getSale, currencyItemPrivats, currency);
 
         Map<String, Double> rate = new HashMap<>();
         rate.put("buy" + currency, privatBuy);
-        rate.put("sell" + currency, privatSele);
+        rate.put("sell" + currency, privatSell);
 
         return rate;
+    }
+
+    private static double getCurrency(Function<CurrencyItemPrivat, Float> function, List<CurrencyItemPrivat> currencyItemPrivats,
+                                      Currency currency) {
+        return currencyItemPrivats.stream()
+                .filter(it -> it.getCcy() == currency)
+                .map(function)
+                .collect(Collectors.toList()).get(0);
     }
 
     @Data
